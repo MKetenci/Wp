@@ -1,0 +1,28 @@
+{
+  "name": "tenno-arsivi",
+  "version": "0.1.0",
+  "description": "Warframe hayran wikisi",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch server.js",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MKetenci/Wp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MKetenci/Wp/issues"
+  },
+  "homepage": "https://github.com/MKetenci/Wp#readme",
+  "dependencies": {
+    "express": "^4.22.3",
+    "marked": "^14.1.4",
+    "sanitize-html": "^2.18.1"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22.13"
+  }
+}
