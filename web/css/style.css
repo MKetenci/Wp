@@ -109,7 +109,9 @@ select, input[type=search] {
 .panel { padding-top: 16px; }
 
 /* ---------- items ---------- */
-.toolbar { display: grid; grid-template-columns: minmax(180px, 2fr) repeat(4, minmax(0, 1fr)); gap: 8px; }
+.toolbar { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.toolbar input[type=search] { grid-column: span 2; }
+.toolbar #f-sort { grid-column: span 2; }
 .list-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 12px 0 8px; flex-wrap: wrap; font-size: .9rem; }
 .bulk { display: flex; gap: 6px; }
 .items { list-style: none; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
@@ -128,6 +130,18 @@ select, input[type=search] {
 .item-xp { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; font-size: .9rem; }
 .item-xp .of { color: var(--muted); }
 .rank-select { padding: 4px 6px; font-size: .8rem; }
+.item-xp .eff { font-size: .75rem; color: var(--muted); margin-top: 2px; }
+.item-sub .method { color: var(--text); opacity: .8; }
+.conf { font-size: .68rem; padding: 0 6px; border-radius: 99px; border: 1px dashed var(--muted); color: var(--muted); white-space: nowrap; }
+.item-details { grid-column: 2 / -1; font-size: .85rem; }
+.item-details summary { cursor: pointer; color: var(--void); width: max-content; font-size: .8rem; }
+.details-body { margin-top: 6px; padding: 10px 12px; background: var(--surface-2); border-radius: 8px; border: 1px solid var(--line); }
+.details-body p { margin: 4px 0; }
+.parts, .grid { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: .82rem; }
+.parts th, .parts td, .grid th, .grid td { text-align: left; padding: 5px 8px; border-top: 1px solid var(--line); }
+.parts th, .grid th { color: var(--muted); font-weight: 500; }
+.parts .num, .grid .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+#sum-methods .grid { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
 
 .check { position: relative; display: inline-flex; cursor: pointer; }
 .check input { position: absolute; opacity: 0; width: 22px; height: 22px; margin: 0; cursor: pointer; }
@@ -195,6 +209,7 @@ select, input[type=search] {
 
 @media (max-width: 860px) {
   .toolbar { grid-template-columns: 1fr 1fr; }
+  .toolbar #f-sort { grid-column: 1 / -1; }
   .toolbar input[type=search] { grid-column: 1 / -1; }
 }
 @media (max-width: 640px) {
@@ -208,6 +223,8 @@ select, input[type=search] {
   .item { grid-template-columns: auto minmax(0, 1fr) auto; padding: 9px 12px; gap: 10px; }
   .item .rank-select { grid-column: 2; grid-row: 2; justify-self: start; }
   .item-xp { grid-column: 3; grid-row: 1; }
+  .item-details { grid-column: 1 / -1; }
+  #sum-methods .grid th:nth-child(5), #sum-methods .grid td:nth-child(5) { display: none; }
   .nodes th, .nodes td { padding: 7px 10px; }
   .nodes .c { width: 64px; }
   .nodes th:nth-child(2), .nodes td:nth-child(2) { display: none; }

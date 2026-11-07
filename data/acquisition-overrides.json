@@ -1,0 +1,168 @@
+{
+  "_açıklama": "Otomatik sınıflandırmanın bulamadığı veya yanlış bulduğu eşyalar için elle düzeltmeler. method: web/js/effort.js METHODS anahtarlarından biri. confidence: yüksek | orta | düşük.",
+  "Excalibur Umbra": {
+    "method": "quest",
+    "source": "The Sacrifice",
+    "confidence": "yüksek",
+    "requires": [
+      "Görev: The Sacrifice"
+    ]
+  },
+  "Mote Amp": {
+    "method": "quest",
+    "source": "The War Within",
+    "confidence": "yüksek",
+    "requires": [
+      "Görev: The War Within"
+    ],
+    "note": "The War Within sonrası The Quills tarafından verilir."
+  },
+  "Plexus": {
+    "method": "quest",
+    "source": "Rising Tide (Railjack)",
+    "confidence": "orta",
+    "requires": [
+      "Görev: Rising Tide"
+    ]
+  },
+  "Chesa Kubrow": {
+    "method": "companion",
+    "source": "Kubrow yumurtası + Incubator",
+    "confidence": "yüksek"
+  },
+  "Huras Kubrow": {
+    "method": "companion",
+    "source": "Kubrow yumurtası + Incubator",
+    "confidence": "yüksek"
+  },
+  "Raksa Kubrow": {
+    "method": "companion",
+    "source": "Kubrow yumurtası + Incubator",
+    "confidence": "yüksek"
+  },
+  "Sahasa Kubrow": {
+    "method": "companion",
+    "source": "Kubrow yumurtası + Incubator",
+    "confidence": "yüksek"
+  },
+  "Sunika Kubrow": {
+    "method": "companion",
+    "source": "Kubrow yumurtası + Incubator",
+    "confidence": "yüksek"
+  },
+  "Helminth Charger": {
+    "method": "companion",
+    "source": "Helminth Charger yumurtası + Incubator",
+    "confidence": "orta"
+  },
+  "Adarza Kavat": {
+    "method": "companion",
+    "source": "Kavat genetik kodları + Incubator",
+    "confidence": "yüksek"
+  },
+  "Smeeta Kavat": {
+    "method": "companion",
+    "source": "Kavat genetik kodları + Incubator",
+    "confidence": "yüksek"
+  },
+  "Medjay Predasite": {
+    "method": "companion",
+    "source": "Deimos (Son)",
+    "confidence": "orta"
+  },
+  "Pharaoh Predasite": {
+    "method": "companion",
+    "source": "Deimos (Son)",
+    "confidence": "orta"
+  },
+  "Vizier Predasite": {
+    "method": "companion",
+    "source": "Deimos (Son)",
+    "confidence": "orta"
+  },
+  "Crescent Vulpaphyla": {
+    "method": "companion",
+    "source": "Deimos (Son)",
+    "confidence": "orta"
+  },
+  "Panzer Vulpaphyla": {
+    "method": "companion",
+    "source": "Deimos (Son)",
+    "confidence": "orta"
+  },
+  "Sly Vulpaphyla": {
+    "method": "companion",
+    "source": "Deimos (Son)",
+    "confidence": "orta"
+  },
+  "Akaten": {
+    "method": "adversary",
+    "source": "Sisters of Parvos (Hound parçaları)",
+    "confidence": "orta"
+  },
+  "Batoten": {
+    "method": "adversary",
+    "source": "Sisters of Parvos (Hound parçaları)",
+    "confidence": "orta"
+  },
+  "Lacerten": {
+    "method": "adversary",
+    "source": "Sisters of Parvos (Hound parçaları)",
+    "confidence": "orta"
+  },
+  "Voidrig": {
+    "method": "vendor",
+    "source": "NecraLoid + Isolation Vault bounty'leri",
+    "confidence": "orta"
+  },
+  "Grendel": {
+    "method": "vendor",
+    "source": "Arbitration Honors (konum anahtarları)",
+    "confidence": "orta"
+  },
+  "Kullervo": {
+    "method": "bounty",
+    "source": "Kullervo's Hold (Duviri)",
+    "confidence": "orta"
+  },
+  "Dagath": {
+    "method": "dojo",
+    "source": "Dagath's Hollow",
+    "confidence": "orta",
+    "requires": [
+      "Klan Dojo: Dagath's Hollow"
+    ]
+  },
+  "Grimoire": {
+    "method": "quest",
+    "source": "Whispers in the Walls",
+    "confidence": "yüksek",
+    "requires": [
+      "Görev: Whispers in the Walls"
+    ],
+    "note": "Kaynak: wiki Hidden Mastery sayfası."
+  },
+  "Bhaira Hound": {
+    "method": "adversary",
+    "source": "Sisters of Parvos (Hound parçaları)",
+    "confidence": "orta"
+  },
+  "Dorma Hound": {
+    "method": "adversary",
+    "source": "Sisters of Parvos (Hound parçaları)",
+    "confidence": "orta"
+  },
+  "Hec Hound": {
+    "method": "adversary",
+    "source": "Sisters of Parvos (Hound parçaları)",
+    "confidence": "orta"
+  },
+  "Venari Prime": {
+    "method": "relic",
+    "source": "Khora Prime ile birlikte gelir",
+    "confidence": "orta",
+    "requires": [
+      "Khora Prime"
+    ]
+  }
+}

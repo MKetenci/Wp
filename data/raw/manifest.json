@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-07T22:04:41.394Z",
+  "fetchedAt": "2026-11-07T22:30:19.340Z",
   "source": "https://wiki.warframe.com",
   "license": "CC BY-SA",
   "files": {
@@ -12,6 +12,7 @@
     "warframes.lua": "https://wiki.warframe.com/w/Module:Warframes/data",
     "companions.lua": "https://wiki.warframe.com/w/Module:Companions/data",
     "missions.lua": "https://wiki.warframe.com/w/Module:Missions/data",
+    "research.lua": "https://wiki.warframe.com/w/Module:Research/data",
     "exclusive_mastery.wiki": "https://wiki.warframe.com/w/Exclusive_Mastery",
     "hidden_mastery.wiki": "https://wiki.warframe.com/w/Hidden_Mastery",
     "expected_totals.json": "https://wiki.warframe.com/w/Mastery_Rank#Total_Mastery"

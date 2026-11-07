@@ -21,6 +21,7 @@ const MODULES = {
   'warframes.lua': 'Module:Warframes/data',
   'companions.lua': 'Module:Companions/data',
   'missions.lua': 'Module:Missions/data',
+  'research.lua': 'Module:Research/data',
   'exclusive_mastery.wiki': 'Exclusive_Mastery',
   'hidden_mastery.wiki': 'Hidden_Mastery',
 };

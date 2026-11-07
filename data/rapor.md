@@ -82,6 +82,102 @@ Formül: MR *n* için 2.500 × n²; MR30 sonrası her Legendary rank +147.500.
 | Nightwave / özel yöntem | 2 | 6.000 |
 | Market'ten kaldırıldı (nadir etkinlik) | 1 | 3.000 |
 
+## Efor modeli
+
+Her eşya için edinme yöntemi sınıflandırıldı ve "elde etme + seviye atlatma" için **aktif oyun süresi** tahmin edildi. Üretim bekleme süreleri (Foundry) aktif süreye dahil değildir.
+
+### Yöntemlere göre
+
+| Yöntem | Adet | XP | Ort. süre (sa) | Ort. XP/saat |
+|---|---:|---:|---:|---:|
+| Market (kredi ile plan) | 172 | 538.000 | 0,9 | 4.310 |
+| Klan Dojo araştırması | 105 | 348.000 | 1,7 | 2.379 |
+| Görev / düşman dropu | 100 | 423.000 | 5,3 | 1.598 |
+| Syndicate / itibar satıcısı | 90 | 325.000 | 3,4 | 1.240 |
+| Prime Vault (takas / Prime Resurgence) | 83 | 345.000 | 1,4 | 2.979 |
+| Void Relic (Prime) | 81 | 324.000 | 3,6 | 1.191 |
+| Kuva Lich / Sister / Technocyte Coda | 57 | 231.000 | 7,7 | 541 |
+| Baro Ki'Teer | 32 | 99.000 | 0,8 | 4.063 |
+| Bounty (açık dünya vb.) | 21 | 90.000 | 7,7 | 729 |
+| Görev zinciri (quest) ödülü | 17 | 78.000 | 3 | 1.563 |
+| Market (platin) | 17 | 51.000 | 2,3 | 3.290 |
+| Yetiştirme / evcilleştirme | 14 | 84.000 | 2,6 | 2.381 |
+| Etkinlik ödülü | 11 | 33.000 | 3,4 | 970 |
+| Invasion ödülü | 6 | 18.000 | 2 | 1.500 |
+| Günlük giriş ödülü | 5 | 15.000 | 0,7 | 4.148 |
+| Bilinmiyor | 3 | 12.000 | 4 | 1.069 |
+| Founders — elde edilemez | 3 | 12.000 | ∞ | 0 |
+| Nightwave / özel | 2 | 6.000 | 5,2 | 674 |
+| Market dışı (nadir etkinlik) | 1 | 3.000 | 2,7 | 1.095 |
+
+Sınıflandırma güveni: **yüksek 716**, orta 75, düşük 29.
+
+### En verimli 25 eşya (sınırlı erişimliler hariç)
+
+| Eşya | Kategori | Yöntem | XP | Süre (sa) | XP/saat |
+|---|---|---|---:|---:|---:|
+| Vauban | Warframe | Market (kredi ile plan) | 6.000 | 0,8 | 7.595 |
+| Dethcube | Sentinel | Market (kredi ile plan) | 6.000 | 0,8 | 7.472 |
+| Shade | Sentinel | Market (kredi ile plan) | 6.000 | 0,8 | 7.472 |
+| Wyrm | Sentinel | Market (kredi ile plan) | 6.000 | 0,8 | 7.472 |
+| Taxon | Sentinel | Market (kredi ile plan) | 6.000 | 0,8 | 7.398 |
+| Diriga | Sentinel | Market (kredi ile plan) | 6.000 | 0,9 | 6.715 |
+| Carrier | Sentinel | Market (kredi ile plan) | 6.000 | 0,9 | 6.689 |
+| Dark Split-Sword (Heavy Blade) | Yakın dövüş silahı | Market (kredi ile plan) | 3.000 | 0,5 | 6.000 |
+| Dorrclave | Yakın dövüş silahı | Market (kredi ile plan) | 3.000 | 0,5 | 6.000 |
+| Mk1-Bo | Yakın dövüş silahı | Market (kredi ile plan) | 3.000 | 0,5 | 6.000 |
+| Mk1-Furax | Yakın dövüş silahı | Market (kredi ile plan) | 3.000 | 0,5 | 6.000 |
+| Sheev | Yakın dövüş silahı | Market (kredi ile plan) | 3.000 | 0,5 | 6.000 |
+| War Prime | Yakın dövüş silahı | Market (kredi ile plan) | 3.000 | 0,5 | 6.000 |
+| Braton | Birincil silah | Market (kredi ile plan) | 3.000 | 0,5 | 6.000 |
+| Cinta | Birincil silah | Market (platin) | 3.000 | 0,5 | 6.000 |
+| EFV-5 Jupiter | Birincil silah | Market (platin) | 3.000 | 0,5 | 6.000 |
+| Haalvu | Birincil silah | Market (kredi ile plan) | 3.000 | 0,5 | 6.000 |
+| Mk1-Braton | Birincil silah | Market (kredi ile plan) | 3.000 | 0,5 | 6.000 |
+| Mk1-Paris | Birincil silah | Market (kredi ile plan) | 3.000 | 0,5 | 6.000 |
+| Mk1-Strun | Birincil silah | Market (kredi ile plan) | 3.000 | 0,5 | 6.000 |
+| Nunchasa | Birincil silah | Market (platin) | 3.000 | 0,5 | 6.000 |
+| Purgator 1 | Birincil silah | Market (platin) | 3.000 | 0,5 | 6.000 |
+| Artax | Sentinel silahı | Market (kredi ile plan) | 3.000 | 0,5 | 6.000 |
+| Burst Laser | Sentinel silahı | Market (kredi ile plan) | 3.000 | 0,5 | 6.000 |
+| Burst Laser Prime | Sentinel silahı | Market (kredi ile plan) | 3.000 | 0,5 | 6.000 |
+
+### En zahmetli 15 eşya
+
+| Eşya | Kategori | Yöntem | XP | Süre (sa) | XP/saat |
+|---|---|---|---:|---:|---:|
+| Broken War | Yakın dövüş silahı | Görev / düşman dropu — The Second Dream | 3.000 | 44,5 | 67 |
+| Shedu | Birincil silah | Görev / düşman dropu — Erra | 3.000 | 42,2 | 71 |
+| Vesper 77 | İkincil silah | Bounty (açık dünya vb.) | 3.000 | 18,6 | 162 |
+| Reconifex | Birincil silah | Bounty (açık dünya vb.) | 3.000 | 18,2 | 165 |
+| Riot-848 | İkincil silah | Görev / düşman dropu | 3.000 | 12,9 | 232 |
+| Braton Vandal | Birincil silah | Görev / düşman dropu | 3.000 | 11,5 | 261 |
+| Perigale | Birincil silah | Görev / düşman dropu | 3.000 | 11 | 273 |
+| Higasa | Birincil silah | Görev / düşman dropu | 3.000 | 10,8 | 277 |
+| Lato Vandal | İkincil silah | Görev / düşman dropu | 3.000 | 10,2 | 295 |
+| Aeolak | Birincil silah | Bounty (açık dünya vb.) | 3.000 | 9,9 | 302 |
+| Sarofang | Yakın dövüş silahı | Görev / düşman dropu | 3.000 | 9,9 | 304 |
+| Furax Wraith | Yakın dövüş silahı | Bounty (açık dünya vb.) | 3.000 | 9,7 | 310 |
+| Mandonel | Arch-gun | Bounty (açık dünya vb.) | 3.000 | 9,3 | 324 |
+| Steflos | Birincil silah | Görev / düşman dropu | 3.000 | 8,9 | 337 |
+| Corufell | Yakın dövüş silahı | Görev / düşman dropu | 3.000 | 8,8 | 339 |
+
+Sınırlı erişimli olmayan 677 eşyanın tamamı: **2.504.000 XP**, tahmini **2.196,3 saat** aktif oyun (ortalama 1.140 XP/saat).
+
+### Varsayımlar
+
+- Seviye atlatma (0→30, bir tur): silah 0.5 sa, Warframe 0.75 sa, yoldaş 0.75 sa, Archwing 1 sa, Necramech 1 sa. Rank 40 eşyalarda her Forma bir tur daha (+0.2 sa Forma); gilding gereken eşyalarda iki tur.
+- Drop farmı: Her parça için en yüksek olasılıklı kaynak seçilir. Aynı ödül tablosundaki parçalar "kupon toplama" formülüyle hesaplanır. Deneme süreleri görev türüne göre (ör. suikast 8 dk, Disruption 16 dk, bounty 15 dk, relic 8 dk; tanımsızlar 12 dk).
+- Drop verisi olmayan yöntemler için sabit süreler: Klan Dojo araştırması 0.25 sa, Syndicate / itibar satıcısı 1.5 sa, Görev zinciri (quest) ödülü 2 sa, Kuva Lich / Sister / Technocyte Coda 4 sa, Invasion ödülü 1.5 sa, Yetiştirme / evcilleştirme 1.5 sa, Prime Vault (takas / Prime Resurgence) 0.5 sa, Baro Ki'Teer 0.25 sa, Etkinlik ödülü 2 sa, Nightwave / özel 2 sa, Market dışı (nadir etkinlik) 2 sa, Bilinmiyor 2 sa.
+- Kaynaklar: yaygın kaynaklar neredeyse bedava sayılır; nadir kaynaklar (Orokin Cell, Argon Crystal, Neural Sensors, Tellurium, Nitain vb.) birim başına sabit süreyle hesaplanır.
+- Platin ve takas maliyetleri süreye dahil değildir (Market fiyatı ayrıca gösterilir).
+
+### Düşük güvenli sınıflandırmalar
+
+Bu eşyaların kaynağı veride bulunamadı veya tahmin edildi. Düzeltmeler `data/acquisition-overrides.json` dosyasına eklenebilir:
+
+Mausolon (Bilinmiyor), Veritux (Bilinmiyor), Feverspine (Bilinmiyor), Ceramic Dagger (Market (kredi ile plan)), Dark Dagger (Market (kredi ile plan)), Dark Split-Sword (Heavy Blade) (Market (kredi ile plan)), Dark Sword (Market (kredi ile plan)), Heat Sword (Market (kredi ile plan)), Jaw Sword (Market (kredi ile plan)), Mk1-Bo (Market (kredi ile plan)), Mk1-Furax (Market (kredi ile plan)), Pangolin Sword (Market (kredi ile plan)), Paracesis (Market (kredi ile plan)), Plasma Sword (Market (kredi ile plan)), Sheev (Market (kredi ile plan)), Skiajati (Market (kredi ile plan)), Thalys (Market (kredi ile plan)), War Prime (Market (kredi ile plan)), AX-52 (Market (kredi ile plan)), Braton (Market (kredi ile plan)), Haalvu (Market (kredi ile plan)), Mk1-Braton (Market (kredi ile plan)), Mk1-Paris (Market (kredi ile plan)), Mk1-Strun (Market (kredi ile plan)), Thornbak (Market (kredi ile plan)), Lato (Market (kredi ile plan)), Mk1-Furis (Market (kredi ile plan)), Mk1-Kunai (Market (kredi ile plan)), Sicarus (Market (kredi ile plan))
+
 ## Veri kapsamı
 
 - Edinme verisi (WFCD) eşleşen eşya: **818 / 820**
@@ -91,8 +187,8 @@ Formül: MR *n* için 2.500 × n²; MR30 sonrası her Legendary rank +147.500.
 
 ### Bilinen sınırlamalar (sonraki aşamalarda ele alınacak)
 
-- Edinme **yöntemi** henüz sınıflandırılmadı. Örneğin Kuva Lich, Sister, syndicate itibarı, klan Dojo araştırması veya görev (quest) ödülü olan eşyalarda drop listesi boş görünür. Bu, 3. aşamada (efor modeli) eklenecek.
-- Bileşen drop listeleri ham kaynakları da (ör. Alloy Plate) içeriyor; efor modeli bunları ayrıca ele alacak.
+- Efor süreleri **tahmindir** (bkz. "Efor modeli" bölümündeki varsayımlar). Syndicate rütbesine ulaşma süresi, klan araştırması ve günlük itibar sınırı hesaba katılmaz; bunlar önkoşul olarak listelenir.
+- Modüler eşyalarda (Zaw, Kitgun, Amp) yalnızca mastery veren ana parça hesaplanır; diğer parçalar (grip, link vb.) dahil değildir.
 - Platin fiyatları (warframe.market) henüz yok.
 - "Exclusive" sınıflandırması wiki'nin Exclusive Mastery sayfasına dayanır. Prime Vault eşyaları takasla ya da Prime Resurgence ile her zaman alınabilir; bu yüzden "Hiçbir exclusive olmadan" senaryosu en katı senaryodur.
 

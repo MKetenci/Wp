@@ -13,6 +13,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import Items from '@wfcd/items';
 import { loadLuaTable } from './lib/lua.js';
+import { classify } from './lib/acquisition.js';
 import renderReport from './lib/report.js';
 import * as M from '../web/js/mastery.js';
 
@@ -62,7 +63,7 @@ for (const [file, slots] of Object.entries(WEAPON_FILES)) {
     addItem({
       name: w.Name, category, maxRank: w.MaxRank || 30, masteryReq: w.Mastery,
       internalName: w.InternalName, link: w.Link, image: w.Image,
-      extra: { traits: w.Traits || [] },
+      extra: { traits: Array.isArray(w.Traits) ? w.Traits : Object.values(w.Traits || {}) },
     });
   }
 }
@@ -198,6 +199,19 @@ for (const item of items) {
   };
 }
 
+// ------------------------------------------- acquisition method (how) ---
+
+const researchData = loadLuaTable(raw('research.lua'));
+const research = new Map(
+  Object.entries(researchData.Research).map(([name, r]) => [name, { labName: researchData.Labs[r.Lab]?.Name || r.Lab }])
+);
+const overrides = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'acquisition-overrides.json'), 'utf8'));
+for (const name of Object.keys(overrides)) {
+  if (!name.startsWith('_') && !byName.has(name.toLowerCase())) problems.push(`Override'daki eşya veride yok: ${name}`);
+}
+const itemNames = new Set(items.map((i) => i.name));
+for (const item of items) item.acq = classify(item, { research, overrides, itemNames });
+
 // ---------------------------------------------------- star chart & co ---
 
 const missionData = loadLuaTable(raw('missions.lua')).MissionDetails;
@@ -302,7 +316,7 @@ const data = {
 };
 fs.writeFileSync(path.join(ROOT, 'data', 'mastery-data.json'), JSON.stringify(data, null, 1) + '\n');
 
-// Slim copy for the web app: no drop/component details (those come in phase 3).
+// Slim copy for the web app: raw drop/component lists are replaced by the classified `acq`.
 const webData = {
   meta: data.meta,
   categories: data.categories,
@@ -312,6 +326,8 @@ const webData = {
     vaulted: !!i.acquisition?.vaulted, tradable: !!i.acquisition?.tradable,
     exclusive: i.exclusive ? { group: i.exclusive.group, label: i.exclusive.label, impossible: i.exclusive.impossible } : null,
     hidden: i.hiddenOnProfile ? (i.hiddenOnProfile.acquisition || true) : null,
+    forma: i.forma,
+    acq: i.acq,
   })),
   starChart: {
     nodes: nodes.map(({ name, planet, type, xp }) => ({ name, planet, type, xp })),

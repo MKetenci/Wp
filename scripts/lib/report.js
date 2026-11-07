@@ -1,7 +1,8 @@
 /** Renders data/rapor.md — the human-readable summary of the built data. */
 import * as M from '../../web/js/mastery.js';
+import { DEFAULTS, METHODS, estimateEffort } from '../../web/js/effort.js';
 
-const fmt = (n) => n.toLocaleString('tr-TR');
+const fmt = (n) => Math.round(n).toLocaleString('tr-TR');
 const rank = (xp) => M.rankLabel(M.rankForXp(xp));
 
 export default function renderReport({ data, checks, expected, joined, problems, warnings = [] }) {
@@ -82,6 +83,8 @@ export default function renderReport({ data, checks, expected, joined, problems,
   for (const [label, g] of Object.entries(groups).sort((a, b) => b[1].xp - a[1].xp)) p(`| ${label} | ${g.n} | ${fmt(g.xp)} |`);
   p();
 
+  renderEffort(p, items);
+
   p('## Veri kapsamı');
   p();
   const withAcq = items.filter((i) => i.acquisition);
@@ -95,8 +98,8 @@ export default function renderReport({ data, checks, expected, joined, problems,
 
   p('### Bilinen sınırlamalar (sonraki aşamalarda ele alınacak)');
   p();
-  p('- Edinme **yöntemi** henüz sınıflandırılmadı. Örneğin Kuva Lich, Sister, syndicate itibarı, klan Dojo araştırması veya görev (quest) ödülü olan eşyalarda drop listesi boş görünür. Bu, 3. aşamada (efor modeli) eklenecek.');
-  p('- Bileşen drop listeleri ham kaynakları da (ör. Alloy Plate) içeriyor; efor modeli bunları ayrıca ele alacak.');
+  p('- Efor süreleri **tahmindir** (bkz. "Efor modeli" bölümündeki varsayımlar). Syndicate rütbesine ulaşma süresi, klan araştırması ve günlük itibar sınırı hesaba katılmaz; bunlar önkoşul olarak listelenir.');
+  p('- Modüler eşyalarda (Zaw, Kitgun, Amp) yalnızca mastery veren ana parça hesaplanır; diğer parçalar (grip, link vb.) dahil değildir.');
   p('- Platin fiyatları (warframe.market) henüz yok.');
   p('- "Exclusive" sınıflandırması wiki\'nin Exclusive Mastery sayfasına dayanır. Prime Vault eşyaları takasla ya da Prime Resurgence ile her zaman alınabilir; bu yüzden "Hiçbir exclusive olmadan" senaryosu en katı senaryodur.');
   p();
@@ -125,3 +128,69 @@ export default function renderReport({ data, checks, expected, joined, problems,
   }
   return lines.join('\n');
 };
+
+const hours = (h) => (Number.isFinite(h) ? h.toLocaleString('tr-TR', { maximumFractionDigits: 1 }) : '∞');
+
+function renderEffort(p, items) {
+  const rows = items.map((i) => ({ i, e: estimateEffort(i, i.acq) }));
+  p('## Efor modeli');
+  p();
+  p('Her eşya için edinme yöntemi sınıflandırıldı ve "elde etme + seviye atlatma" için **aktif oyun süresi** tahmin edildi. Üretim bekleme süreleri (Foundry) aktif süreye dahil değildir.');
+  p();
+  p('### Yöntemlere göre');
+  p();
+  p('| Yöntem | Adet | XP | Ort. süre (sa) | Ort. XP/saat |');
+  p('|---|---:|---:|---:|---:|');
+  const byMethod = {};
+  for (const r of rows) (byMethod[r.e.method] ||= []).push(r);
+  for (const [m, list] of Object.entries(byMethod).sort((a, b) => b[1].length - a[1].length)) {
+    const xp = list.reduce((s, r) => s + r.i.mastery, 0);
+    const finite = list.filter((r) => Number.isFinite(r.e.totalHours));
+    const avgH = finite.length ? finite.reduce((s, r) => s + r.e.totalHours, 0) / finite.length : Infinity;
+    const avgX = finite.length ? finite.reduce((s, r) => s + r.e.xpPerHour, 0) / finite.length : 0;
+    p(`| ${METHODS[m].label} | ${list.length} | ${fmt(xp)} | ${hours(avgH)} | ${fmt(avgX)} |`);
+  }
+  p();
+  const conf = { 'yüksek': 0, orta: 0, 'düşük': 0 };
+  for (const r of rows) conf[r.i.acq.confidence]++;
+  p(`Sınıflandırma güveni: **yüksek ${conf['yüksek']}**, orta ${conf.orta}, düşük ${conf['düşük']}.`);
+  p();
+
+  const open = rows.filter((r) => !r.e.limited && !r.e.impossible).sort((a, b) => b.e.xpPerHour - a.e.xpPerHour);
+  const table = (list) => {
+    p('| Eşya | Kategori | Yöntem | XP | Süre (sa) | XP/saat |');
+    p('|---|---|---|---:|---:|---:|');
+    for (const { i, e } of list) p(`| ${i.name} | ${M.CATEGORIES[i.category].label} | ${e.label}${i.acq.source ? ` — ${i.acq.source}` : ''} | ${fmt(i.mastery)} | ${hours(e.totalHours)} | ${fmt(e.xpPerHour)} |`);
+    p();
+  };
+  p('### En verimli 25 eşya (sınırlı erişimliler hariç)');
+  p();
+  table(open.slice(0, 25));
+  p('### En zahmetli 15 eşya');
+  p();
+  table(open.slice(-15).reverse());
+
+  const sumH = open.reduce((s, r) => s + r.e.totalHours, 0);
+  const sumXp = open.reduce((s, r) => s + r.i.mastery, 0);
+  p(`Sınırlı erişimli olmayan ${open.length} eşyanın tamamı: **${fmt(sumXp)} XP**, tahmini **${hours(sumH)} saat** aktif oyun (ortalama ${fmt(sumXp / sumH)} XP/saat).`);
+  p();
+
+  p('### Varsayımlar');
+  p();
+  p(`- Seviye atlatma (0→30, bir tur): silah ${DEFAULTS.levelHours.weapon} sa, Warframe ${DEFAULTS.levelHours.warframe} sa, yoldaş ${DEFAULTS.levelHours.companion} sa, Archwing ${DEFAULTS.levelHours.archwing} sa, Necramech ${DEFAULTS.levelHours.necramech} sa. Rank 40 eşyalarda her Forma bir tur daha (+${DEFAULTS.formaHours} sa Forma); gilding gereken eşyalarda iki tur.`);
+  p(`- Drop farmı: Her parça için en yüksek olasılıklı kaynak seçilir. Aynı ödül tablosundaki parçalar "kupon toplama" formülüyle hesaplanır. Deneme süreleri görev türüne göre (ör. suikast 8 dk, Disruption 16 dk, bounty 15 dk, relic 8 dk; tanımsızlar ${DEFAULTS.defaultAttemptMinutes} dk).`);
+  p(`- Drop verisi olmayan yöntemler için sabit süreler: ${Object.entries(DEFAULTS.methodHours).filter(([, h]) => Number.isFinite(h) && h > 0).map(([m, h]) => `${METHODS[m].label} ${h} sa`).join(', ')}.`);
+  p('- Kaynaklar: yaygın kaynaklar neredeyse bedava sayılır; nadir kaynaklar (Orokin Cell, Argon Crystal, Neural Sensors, Tellurium, Nitain vb.) birim başına sabit süreyle hesaplanır.');
+  p('- Platin ve takas maliyetleri süreye dahil değildir (Market fiyatı ayrıca gösterilir).');
+  p();
+
+  const low = rows.filter((r) => r.i.acq.confidence === 'düşük');
+  if (low.length) {
+    p('### Düşük güvenli sınıflandırmalar');
+    p();
+    p('Bu eşyaların kaynağı veride bulunamadı veya tahmin edildi. Düzeltmeler `data/acquisition-overrides.json` dosyasına eklenebilir:');
+    p();
+    p(low.map((r) => `${r.i.name} (${r.e.label})`).join(', '));
+    p();
+  }
+}

@@ -63,8 +63,11 @@
         <option value="limited">Sınırlı erişimli</option>
         <option value="impossible">Artık elde edilemez</option>
       </select>
+      <select id="f-method" aria-label="Edinme yöntemi"></select>
       <select id="f-sort" aria-label="Sıralama">
         <option value="name">Ada göre</option>
+        <option value="eff">Verimliliğe göre (XP/saat)</option>
+        <option value="hours">Süreye göre (kısa → uzun)</option>
         <option value="xp">XP'ye göre</option>
         <option value="mr">Gereken MR'a göre</option>
         <option value="category">Kategoriye göre</option>
@@ -95,6 +98,8 @@
   <section class="panel" id="panel-ozet" role="tabpanel" hidden>
     <h2>Kaynağa göre</h2>
     <div id="sum-sources"></div>
+    <h2>Edinme yöntemine göre (kalanlar)</h2>
+    <div id="sum-methods"></div>
     <h2>Kategoriye göre</h2>
     <div id="sum-categories"></div>
   </section>
