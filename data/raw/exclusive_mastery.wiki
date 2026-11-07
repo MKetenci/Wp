@@ -1,0 +1,391 @@
+{{tocright}}
+<onlyinclude>Most [[Mastery]]-rewarding items can be directly bought, built, or researched. However the following items had a limited distribution period or were removed from circulation entirely. Most of these items can be still be acquired, but may require waiting for specific events or trading with other players. 
+
+<tabber>
+Market Retired =
+'''Acquisition:''' Events or Special Alerts
+<br>
+These items were once available from the [[Market]] but have since been removed. They cannot be [[trade]]d, but may rarely appear as rewards for [[Event]]s or [[Tactical Alert]]s.
+
+{| class="listtable sortable" width="500"
+!width="250"|Item			!!width="125"|Count	!!width="125"|Mastery
+|-
+|  {{Weapon|Snipetron}}			||  Primary		||  3,000
+|-
+!  Total:				        !!  1			!!  3,000
+|}
+
+|-|Founders Pack =
+'''Acquisition:''' None
+<br>
+These items were part of the [[Founders|Founders Program]], rewarding those who purchased them during the crucial early stages of the game. They cannot be [[trade]]d and will never be offered again.
+
+{| class="listtable sortable" width="500"
+!width="250"|Item			!!width="125"|Count	!!width="125"|Mastery
+|-
+|  {{WF|Excalibur Prime}}		||  Warframe	    ||  6,000
+|-
+|  {{Weapon|Lato Prime}}		||  Secondary		||  3,000
+|-
+|  {{Weapon|Skana Prime}}		||  Melee		    ||  3,000
+|-
+!  Total:				        !!  3			    !!  12,000
+|}
+
+|-|Nightwave =
+'''Acquisition:''' [[Wolf Beacon]] and [[Nightwave/Offerings|Nightwave Offerings]]
+<br>
+{{Weapon|Wolf Sledge}} is only obtainable by killing the [[Wolf of Saturn Six]]. He spawned during the [[Nightwave/Series 1]] and can now only spawn with a [[Wolf Beacon]]. {{Weapon|Vitrica}} is only obtainable by killing [[Nihil]] after purchasing the Nihil's Oubliette decoration and the Enter Nihil's Oubliette Key.
+
+{| class="listtable sortable" width="500"
+!width="250"|Item			!!width="125"|Count	!!width="125"|Mastery
+|-
+|  {{Weapon|Wolf Sledge}}	||  Melee		||  3,000
+|-
+|  {{Weapon|Vitrica}}	    ||  Melee		||  3,000
+|-
+!  Total:				    !!  2			!!  6,000
+|}
+
+|-|Event Reward =
+'''Acquisition:''' Events, Special Alerts, or Celebrations
+<br>
+These items can appear as rewards for [[Event]]s, [[Tactical Alert]]s, or celebratory periods. Their parts and/or blueprints can be [[trade]]d except for all [[Dex|Dex Weapons]], both Plague [[Zaw|Zaw Strikes]], and the {{Weapon|Opticor Vandal}}.
+
+{| class="listtable sortable" width="500"
+!width="250"|Item			!!width="125"|Count	!!width="125"|Mastery
+|-
+|  {{Weapon|Gorgon Wraith}}		     ||  Primary		     ||  3,000
+|-
+|  {{Weapon|Imperator Vandal}}	     ||  Arch-Gun		     ||  3,000
+|-
+|  {{Weapon|Dex Furis}}			     ||  Secondary		     ||  3,000
+|-
+|  {{Weapon|Dex Dakra}}			     ||  Melee		         ||  3,000
+|-
+|  {{Weapon|Dex Sybaris}}		     ||  Primary		     ||  3,000
+|-
+|  {{Weapon|Plague Keewar}}		     ||  [[Zaw|Zaw Strike]]	 ||  3,000
+|-
+|  {{Weapon|Plague Kripath}}	     ||  [[Zaw|Zaw Strike]]	 ||  3,000
+|-
+|  {{Weapon|Opticor Vandal}}&#42;    ||  Primary             ||  3,000
+|-
+|  {{Weapon|Basmu}}                  ||  Primary             ||  3,000
+|-
+|  {{Weapon|Ceti Lacera}}            ||  Melee               ||  3,000
+|-
+|  {{Weapon|Dex Nikana}}		     ||  Melee		         ||  3,000
+|-
+!  Total:				             !!  11			         !!  33,000
+|}
+:&#42;  Opticor Vandal can also be purchased from Baro Ki'Teer, which has the only tradeable version
+
+|-|Void Trader =
+'''Acquisition:''' Purchase or Trade
+<br>
+These items can occasionally appear with [[Baro Ki'Teer]]'s merchandise. [[Affinity|Unranked]] weapons can be [[trade]]d.
+
+{| class="listtable sortable" width="500"
+! width="250" |Item			!! width="125" |Count	!! width="125" |Mastery
+|-
+|  {{Weapon|Mara Detron}}		        ||  Secondary	    ||  3,000
+|-
+|  {{Weapon|Prisma Gorgon}}		        ||  Primary		    ||  3,000
+|-
+|  {{Weapon|Prisma Lenz}}		        ||  Primary		    ||  3,000
+|-
+|  {{Weapon|Prisma Veritux}}		    ||  Arch-Melee		||  3,000
+|-
+|  {{Weapon|Prisma Skana}}		        ||  Melee		    ||  3,000
+|-
+|  {{Weapon|Prisma Ohma}}		        ||  Melee		    ||  3,000
+|-
+|  {{Weapon|Prisma Grakata}}		    ||  Primary		    ||  3,000
+|-
+|  {{Weapon|Prisma Dual Cleavers}}	    ||  Melee		    ||  3,000
+|-
+|  {{Weapon|Prova Vandal}}		        ||  Melee		    ||  3,000
+|-
+|  {{Weapon|Machete Wraith}}		    ||  Melee		    ||  3,000
+|-
+|  {{Weapon|Prisma Tetra}}		        ||  Primary		    ||  3,000
+|-
+|  {{Companion|Prisma Shade}}           ||  Companion		||  6,000
+|-
+|  {{Weapon|Prisma Burst Laser}}&#42;	||  Robotic Weapon	||  3,000
+|-
+|  {{Weapon|Quanta Vandal}}		        ||  Primary		    ||  3,000
+|-
+|  {{Weapon|Aklex Prime}}&Dagger;	    ||  Secondary		||  3,000
+|-
+|  {{Weapon|Vulkar Wraith}}		        ||  Primary		    ||  3,000
+|-
+|  {{Weapon|Prisma Obex}}		        ||  Melee		    ||  3,000
+|-
+|  {{Weapon|Prisma Angstrum}}		    ||  Secondary		||  3,000
+|-
+|  {{Weapon|Viper Wraith}}		        ||  Secondary		||  3,000
+|-
+|  {{Weapon|Supra Vandal}}		        ||  Primary		    ||  3,000
+|-
+|  {{Weapon|Prisma Twin Gremlins}}	    ||  Secondary       ||  3,000
+|-
+|  {{Weapon|Akvasto Prime}}&Dagger;     ||  Secondary       ||  3,000
+|-
+|  {{Weapon|Prisma Grinlok}}		    ||  Primary		    ||  3,000
+|-
+|  {{Weapon|Zylok}}                     ||  Secondary       ||  3,000
+|-
+|  {{Weapon|Glaxion Vandal}}            ||  Primary         ||  3,000
+|-
+|  {{Weapon|Prisma Dual Decurions}}     ||  Arch-Gun        ||  3,000
+|-
+|  {{Weapon|Halikar Wraith}}            ||  Melee           ||  3,000
+|-
+|  {{Weapon|Prisma Machete}}            ||  Melee           ||  3,000
+|-
+|  {{Weapon|Vastilok}}                  ||  Melee           ||  3,000
+|-
+|  {{Weapon|Vericres}}                  ||  Melee           ||  3,000
+|-
+|  {{Weapon|Akmagnus Prime}}&Dagger;    ||  Secondary		||  3,000
+|-
+|  {{Weapon|Gotva Prime}}               ||  Primary         ||  3,000
+|-
+!  Total:				                !!  32      	    !!  99,000
+|}
+:&#42;  	Prisma Burst Laser is included with Prisma Shade when purchased from Baro, but the items are separate when traded with other players.
+:&Dagger;  	Aklex Prime, Akmagnus prime & Akvasto Prime cannot be purchased directly. Aklex Prime parts can be obtained through [[Axi A2]] [[Relic]]s, Akmagnus Prime parts can be obtained through [[Axi M5]] [[Relic]]s, and Akvasto Prime parts can be obtained through [[Axi A5]] [[Relic]]s, all of which are exclusively sold by Baro Ki'Teer.
+
+|-|Daily Tribute =
+'''Acquisition:''' [[Daily Tribute]] system
+<br>
+These weapons are available from the daily tribute system at milestones 100, 300, 500 & 700
+
+{| class="listtable sortable" width ="500"
+! width="250" |Item			!! width="125" |Count	!! width="125" |Mastery
+|-
+| {{Weapon|Azima}}                  ||  Secondary  ||  3,000
+|-
+| {{Weapon|Zenistar}}               ||  Melee      ||  3,000
+|-
+| {{Weapon|Zenith}}                 ||  Primary    ||  3,000
+|-
+| {{Weapon|Sigma & Octantis}}&#42;  ||  Melee      ||  3,000
+|-
+!Total:                             !!  4          !!  12,000
+|}
+:&#42;  Sigma & Octantis will only be available from Day 300
+
+|-|Prime Vault =
+'''Acquisition:''' Legacy Relics, Trade, or Prime Vault Access
+<br>
+[[Relic]]s containing their parts have been placed in the [[Prime Vault]], no longer appearing in drop tables. However their parts and relics can be [[trade]]d or used normally. These items are available on a random rotating schedule through the [[Prime Resurgence]] system.
+
+{| class="listtable sortable" width="500"
+! width="250" | Item !! width="125" |Count!! width="125" |Mastery
+|-
+<!---->
+|{{WF|Frost Prime}}                         ||  Warframe        ||  6,000
+|-
+|{{Weapon|Latron Prime}}                    ||  Primary         ||  3,000
+|-
+|{{Weapon|Reaper Prime}}                    ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Mag Prime}}                           ||  Warframe        ||  6,000
+|-
+|{{Weapon|Boar Prime}}                      ||  Primary         ||  3,000
+|-
+|{{Weapon|Dakra Prime}}                     ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Ember Prime}}                         ||  Warframe        ||  6,000
+|-
+|{{Weapon|Sicarus Prime}}                   ||  Secondary       ||  3,000
+|-
+|{{Weapon|Glaive Prime}}                    ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Rhino Prime}}			                ||  Warframe		||  6,000
+|-
+|{{Weapon|Boltor Prime}}		            ||  Primary		    ||  3,000
+|-
+|{{Weapon|Ankyros Prime}}		            ||  Melee		    ||  3,000
+|-
+<!---->
+|{{WF|Loki Prime}}                          ||  Warframe	    ||  6,000
+|-
+|{{Weapon|Bo Prime}}                        ||  Melee           ||  3,000
+|-
+|{{Companion|Wyrm Prime}}                   ||  Companion       ||  6,000
+|-
+|{{Weapon|Prime Laser Rifle}}&#42;          ||  Sentinel Weapon ||  3,000
+|-
+<!---->
+|{{WF|Nova Prime}}                          ||  Warframe        ||  6,000
+|-
+|{{Weapon|Soma Prime}}                      ||  Primary         ||  3,000
+|-
+|{{Weapon|Vasto Prime}}                     ||  Secondary       ||  3,000
+|-
+<!---->
+|{{WF|Volt Prime}}                          ||  Warframe        ||  6,000
+|-
+|{{WF|Odonata Prime}}                       ||  Archwing        ||  6,000
+|-
+<!---->
+|{{WF|Ash Prime}}                           ||  Warframe        ||  6,000
+|-
+|{{Weapon|Vectis Prime}}                    ||  Primary         ||  3,000
+|-
+|{{Companion|Carrier Prime}}                ||  Companion       ||  6,000
+|-
+|{{Weapon|Sweeper Prime}}&#8224;            ||  Sentinel Weapon ||  3,000
+|-
+<!---->
+|{{WF|Trinity Prime}}                       ||  Warframe        ||  6,000
+|-
+|{{Weapon|Dual Kamas Prime}}                ||  Melee           ||  3,000
+|-
+<!----
+|{{WF|Saryn Prime}}                         ||  Warframe        ||  6,000
+|-
+|{{Weapon|Nikana Prime}}                    ||  Melee           ||  3,000
+|-
+|{{Weapon|Spira Prime}}                     ||  Secondary       ||  3,000
+|-
+<!---->
+|{{WF|Vauban Prime}}                        ||  Warframe        ||  6,000
+|-
+|{{Weapon|Akstiletto Prime}}                ||  Secondary       ||  3,000
+|-
+|{{Weapon|Fragor Prime}}                    ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Nekros Prime}}                        ||  Warframe        ||  6,000
+|-
+|{{Weapon|Tigris Prime}}                    ||  Primary         ||  3,000
+|-
+|{{Weapon|Galatine Prime}}                  ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Banshee Prime}}                       ||  Warframe        ||  6,000
+|-
+|{{Weapon|Euphona Prime}}                   ||  Secondary       ||  3,000
+|-
+|{{Companion|Helios Prime}}                 ||  Companion       ||  6,000
+|-
+|{{Weapon|Deconstructor Prime}}&Dagger;     ||  Sentinel Weapon ||  3,000
+|-
+<!---->
+|{{WF|Oberon Prime}}                        ||  Warframe        ||  6,000
+|-
+|{{Weapon|Sybaris Prime}}                   ||  Primary         ||  3,000
+|-
+|{{Weapon|Silva & Aegis Prime}}             ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Hydroid Prime}}                       ||  Warframe        ||  6,000
+|-
+|{{Weapon|Ballistica Prime}}                ||  Secondary       ||  3,000
+|-
+|{{Weapon|Nami Skyla Prime}}                ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Mirage Prime}}                        ||  Warframe        ||  6,000
+|-
+|{{Weapon|Akbolto Prime}}                   ||  Secondary       ||  3,000
+|-
+|{{Weapon|Kogake Prime}}                    ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Zephyr Prime}}                        ||  Warframe        ||  6,000
+|-
+|{{Weapon|Tiberon Prime}}                   ||  Primary         ||  3,000
+|-
+|{{Weapon|Kronen Prime}}                    ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Limbo Prime}}                         ||  Warframe        ||  6,000
+|-
+|{{Weapon|Pyrana Prime}}                    ||  Secondary       ||  3,000
+|-
+|{{Weapon|Destreza Prime}}                  ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Chroma Prime}}                        ||  Warframe        ||  6,000
+|-
+|{{Weapon|Rubico Prime}}                    ||  Primary         ||  3,000
+|-
+|{{Weapon|Gram Prime}}                      ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Mesa Prime}}                          ||  Warframe        ||  6,000
+|-
+|{{Weapon|Akjagara Prime}}                  ||  Secondary       ||  3,000
+|-
+|{{Weapon|Redeemer Prime}}                  ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Equinox Prime}}                       ||  Warframe        ||  6,000
+|-
+|{{Weapon|Stradavar Prime}}                 ||  Primary         ||  3,000
+|-
+|{{Weapon|Tipedo Prime}}                    ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Wukong Prime}}                        ||  Warframe        ||  6,000
+|-
+|{{Weapon|Zhuge Prime}}                     ||  Primary         ||  3,000
+|-
+|{{Weapon|Ninkondi Prime}}                  ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Atlas Prime}}                         ||  Warframe        ||  6,000
+|-
+|{{Weapon|Tekko Prime}}                     ||  Melee           ||  3,000
+|-
+|{{Companion|Dethcube Prime}}               ||  Companion       ||  6,000
+|-
+|{{Weapon|Deth Machine Rifle Prime}}&#167;  ||  Sentinel Weapon ||  3,000 
+|-
+<!---->
+|{{WF|Ivara Prime}}                         ||  Warframe        ||  6,000
+|-
+|{{Weapon|Baza Prime}}                      ||  Primary         ||  3,000
+|-
+|{{Weapon|Aksomati Prime}}                  ||  Secondary       ||  3,000
+|-
+<!---->
+|{{WF|Titania Prime}}                       ||  Warframe        ||  6,000
+|-
+|{{Weapon|Corinth Prime}}                   ||  Primary         ||  3,000
+|-
+|{{Weapon|Pangolin Prime}}                  ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Inaros Prime}}                        ||  Warframe        ||  6,000
+|-
+|{{Weapon|Panthera Prime}}                  ||  Primary         ||  3,000
+|-
+|{{Weapon|Karyst Prime}}                    ||  Melee           ||  3,000
+|-
+<!---->
+|{{WF|Nezha Prime}}                         ||  Warframe        ||  6,000
+|-
+|{{Weapon|Zakti Prime}}                     ||  Secondary       ||  3,000
+|-
+|{{Weapon|Guandao Prime}}                   ||  Melee           ||  3,000
+|-
+<!---->
+!Total:                                     !!  80              !!  333,000
+|}
+
+:&#42;  	Prime Laser Rifle is included with Wyrm Prime and cannot be obtained separately.
+:&#8224;  	Sweeper Prime is included with Carrier Prime and cannot be obtained separately.
+:&Dagger;   Deconstructor Prime is included with Helios Prime and cannot be obtained separately.
+:&#167;     Deth Machine Rifle Prime is included with Dethcube Prime and cannot be obtained separately.
+</tabber></onlyinclude>
+[[Category:Mastery]]

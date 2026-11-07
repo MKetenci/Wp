@@ -1,0 +1,201 @@
+<!--Editor note: Total counts should be calculated automatically, except Companions and Vehicles have to be edited manually--> 
+{{tocright}}
+
+<onlyinclude>Some [[Mastery]]-rewarding items can be hidden on your [[Player Profile|profile]] until you rank the item to at least rank 1 or other exceptions. 
+<tabber>
+
+Warframe =
+'''Total count:''' {{#expr: {{#invoke:Warframes|getWarframeCount}} - 1}} (+ 1 for [[Founders]]) <br />
+'''Hidden items:'''
+{| class="listtable sortable" width="500"
+! width="250" | Item !! width="125" | Mastery !! width="250" | Acquisition
+|-
+| {{WF|Excalibur Prime}} || 6,000 || [[Founders|Founders Program]]
+|-
+| {{WF|Excalibur Umbra}} || 6,000 || [[The Sacrifice]] [[quest]]
+|-
+! Total: !!  {{Math|(2*6000)}}
+|}
+
+|-|Primary =
+'''Total count:''' {{#expr: {{#invoke:Weapons|getWeaponCount|Primary}} + {{#invoke:Weapons|getWeaponCount|Kitgun}} }} <br />
+'''Hidden items:'''
+{| class="listtable sortable" width="500"
+! width="250" | Item !! width="125" | Mastery !! width="250" | Acquisition
+|-
+| {{Weapon|Dera Vandal}} || 3,000 || [[Invasion]]
+|-
+| {{Weapon|Dex Sybaris}} || 3,000 || WARFRAME Anniversary (around March 27th)
+|-
+| {{Weapon|Gorgon Wraith}} || 3,000 || [[Razorback]]
+|-
+| {{Weapon|Karak Wraith}} || 3,000 || [[Invasion]]
+|-
+| {{Weapon|Latron Wraith}}|| 3,000 || [[Invasion]]
+|-
+| {{Weapon|Nataruk}} || 3,000 || [[The New War]] [[quest]]
+|-
+| {{Weapon|Opticor Vandal}}	|| 3,000 || [[Thermia Fractures]] and [[Baro Ki'Teer]]
+|-
+| {{Weapon|Prisma Gorgon}} || 3,000 || [[Baro Ki'Teer]]
+|-
+| {{Weapon|Prisma Lenz}} || 3,000 || [[Baro Ki'Teer]]
+|-
+| {{Weapon|Quanta Vandal}} || 3,000 || [[Baro Ki'Teer]]
+|-
+| {{Weapon|Snipetron}} || 3,000 || [[Operation: Plague Star]] and [[Star Days]]
+|-
+| {{Weapon|Snipetron Vandal}} || 3,000 || [[Invasion]]
+|-
+| {{Weapon|Strun Wraith}} || 3,000 || [[Invasion]]
+|-
+| {{Weapon|Vinquibus}} || 3,000 || [[The Descendia]]
+|-
+! Total: !! {{Math|(14*3000)}}
+|}
+
+|-|Secondary = 
+'''Total count:''' {{#expr: {{#invoke:Weapons|getWeaponCount|Secondary}} + {{#invoke:Weapons|getWeaponCount|Kitgun}} - 1}} (+ 1 for [[Founders]]) <br />
+'''Hidden items:'''
+{| class="listtable sortable" width="500"
+! width="250" | Item !! width="125" | Mastery !! width="250" | Acquisition
+|-
+| {{Weapon|Lato Prime}}	|| 3,000 || [[Founders|Founders Program]]
+|-
+| {{Weapon|Mara Detron}} || 3,000 || [[Baro Ki'Teer]]
+|-
+| {{Weapon|Twin Vipers Wraith}} || 3,000  || [[Invasion]]
+|-
+| {{Weapon|Viper Wraith}} || 3,000 || [[Baro Ki'Teer]]
+|-
+| {{Weapon|Grimoire}} || 3,000 || [[Whispers in the Walls]] [[quest]]
+|-
+!  Total: !! {{Math|(5*3000)}}
+|}
+
+
+|-|Melee =
+'''Total count:''' {{#expr: {{#invoke:Weapons|getWeaponCount|Melee}} + {{#invoke:Weapons|getWeaponCount|Zaw}} - 1}} (+ 1 for [[Founders]]) <br />
+'''Hidden items:'''
+{| class="listtable sortable" width="500"
+! width="250" | Item !! width="125" | Mastery !! width="250" | Acquisition
+|-
+| {{Weapon|Dex Dakra}} || 3,000 || WARFRAME Anniversary (around March 27th)
+|-
+| {{Weapon|Korumm}}	|| 3,000 || [[Bounty]] after [[The New War]] [[quest]]
+|-
+| {{Weapon|Machete Wraith}} || 3,000 || [[Baro Ki'Teer]]
+|-
+| {{Weapon|Nepheri}} || 3,000 || [[Bounty]] after [[The New War]] [[quest]]
+|-
+| {{Weapon|Paracesis}} || 4,000 || [[Chimera Prologue]] [[quest]]
+|-
+| {{Weapon|Prisma Ohma}} || 3,000 || [[Baro Ki'Teer]]
+|-
+| {{Weapon|Sheev}} || 3,000 || [[Invasion]]
+|-
+| {{Weapon|Skiajati}} || 3,000 || [[The Sacrifice]] [[quest]]
+|-
+| {{Weapon|Skana Prime}} || 3,000 || [[Founders|Founders Program]]
+|-
+| {{Weapon|Tak & Lug}} || 3,000 || [[Ghoul Purge]]
+|-
+| {{Weapon|Tonkkatt}} || 3,000 || [[Ghoul Purge]]
+|-
+| {{Weapon|Verdilac}} || 3,000 || [[Bounty]] after [[The New War]] [[quest]]
+|-
+| {{Weapon|War Prime}} || 3,000 || Crafting [[Hunhow's Trinket]] after [[Jade Shadows: Constellations]] [[quest]]
+|-
+| {{Weapon|Xoris}} || 3,000 || [[The Deadlock Protocol]] [[quest]]
+|-
+! Total: !! {{Math|(12*3000)+(1*4000)}}
+|}
+
+|-|Robotic =
+'''Total count:''' {{#expr: ({{#invoke:Weapons|getWeaponCount|Robotic}} + {{#invoke:Weapons|getWeaponCount|Hound}}) *2 }} <br />
+'''Hidden items:'''
+{| class="listtable sortable" width="500"
+! width="250" | Item !! width="125" | Mastery !! width="250" | Acquisition
+|-
+| {{Weapon|Akaten}} || 3,000 || [[Hound]] from defeating a [[Sisters of Parvos]]
+|-
+| {{Weapon|Batoten}} || 3,000 || [[Hound]] from defeating a [[Sisters of Parvos]]
+|-
+| {{Weapon|Lacerten}} || 3,000 || [[Hound]] from defeating a [[Sisters of Parvos]]
+|-
+| {{Weapon|Prisma Burst Laser}}&#42; || 3,000 || [[Baro Ki'Teer]]
+|-
+| {{Companion|Prisma Shade}} || 6,000 || [[Baro Ki'Teer]]
+|-
+! Total: !! {{Math|(4*3000)+(1*6000)}}
+|}
+:&#42;  	Prisma Burst Laser is included with Prisma Shade when purchased from Baro, but the items are separate when traded with other players.
+
+|-|Companions =
+'''Total count:''' {{#expr: 6 + (4 - 1) + 3 + 3}} <br />
+<!--Kubrows + (Kavats - Venari) + Predasites + Vulpaphylas--> 
+'''Hidden items:'''
+{| class="listtable sortable" width="500"
+! width="250" | Item !! width="125" | Mastery !! width="250" | Acquisition
+|-
+| {{Companion|Venari}}&#42; || 6,000 || {{WF|Khora}}
+|-
+| {{Companion|Venari Prime}}&#42; || 6,000 || {{WF|Khora Prime}}
+|-
+! Total: !! {{Math|(2*6000)}}
+|}
+:&#42; Venari and Venari Prime do not show up in the profile even if leveled up, but still provide mastery.
+
+|-|Vehicles =
+'''Total count:''' {{#expr: 5 + 2 + 5 + 1}} <br />
+<!--Kdrive + necramechs + archwings + plexus--> 
+'''Hidden items:'''
+{| class="listtable sortable" width="500"
+! width="250" | Item !! width="125" | Mastery !! width="250" | Acquisition
+|-
+| [[Plexus]]&#42; || 6,000 || [[The Archwing]]
+|-
+! Total: !! {{Math|(1*6000)}}
+|}
+:&#42; Plexus is hidden from the profile until [[The Archwing]] is completed.
+
+|-|Archgun =
+'''Total count:''' {{#invoke:Weapons|getWeaponCount|ArchGun}} <br />
+'''Hidden items:'''
+{| class="listtable sortable" width="500"
+! width="250" | Item !! width="125" | Mastery !! width="250" | Acquisition
+|-
+| {{Weapon|Prisma Dual Decurions}} || 3,000 || [[Baro Ki'Teer]]
+|-
+! Total: !! {{Math|(1 * 3000)}}
+|}
+
+|-|Archmelee =
+'''Total count:''' {{#invoke:Weapons|getWeaponCount|ArchMelee}} <br />
+'''Hidden items:'''
+{| class="listtable sortable" width="500"
+! width="250" | Item !! width="125" | Mastery !! width="250" | Acquisition
+|-
+| {{Weapon|Prisma Veritux}}	|| 3,000 || [[Baro Ki'Teer]]
+|-
+! Total: !! {{Math|(1*3000)}}
+|}
+
+|-|Amps =
+'''Total count:''' {{#invoke:Weapons|getWeaponCount|Amp}}   (some players may see an additional "amp" that counts, but does not provide mastery points) <br />
+'''Hidden items:'''
+* All [[amp]]s are hidden from anyone's profile until the viewing user has acquired an Amp. 
+
+{| class="listtable sortable" width="500"
+! width="250" | Item !! width="125" | Mastery !! width="250" | Acquisition
+|-
+| {{Weapon|Sirocco}} || 3,000 || [[The New War]] [[quest]]
+|-
+! Total: !! {{Math|(1*3000)}}
+|}
+
+</tabber></onlyinclude>
+
+{{MechNav}}
+[[Category:Mastery]]
+[[Category:Codex Secret]]

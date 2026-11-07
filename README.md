@@ -1,53 +1,69 @@
-# Tenno Arşivi
+# Warframe Mastery Rehberi
 
-Warframe için wiki tarzı, herkesin düzenleyebildiği bir hayran sitesi.
+Warframe'de mastery XP veren her şeyi (eşyalar, gezegen haritası, Steel Path, Intrinsic'ler) tarayan bir **mastery hesaplayıcısı** ve **"Legendary'ye en verimli yol" rehberi**.
 
-## Özellikler
+> Arayüz Türkçe; eşya adları oyundaki gibi İngilizce.
 
-- **Kategoriler:** Warframe'ler, Silahlar, Modlar, Yoldaşlar, Gezegenler, Fraksiyonlar, Rehberler
-- **Bilgi kutusu (infobox):** her kategori kendi alanlarını gösterir (ör. silahta kritik şansı, modda polarite)
-- **Markdown içerik** ve `[[Sayfa]]` / `[[Sayfa|metin]]` iç bağlantıları; olmayan sayfalara giden bağlantılar kırmızı görünür
-- **Sürüm geçmişi:** her düzenleme yeni bir sürüm oluşturur; eski sürümler görüntülenebilir ve geri alınabilir
-- **Tam metin arama** (SQLite FTS5); başlık birebir eşleşirse doğrudan sayfaya gider
-- Otomatik içindekiler tablosu, son değişiklikler, tüm sayfalar, rastgele sayfa
-- Basit JSON API: `/api/sayfalar`, `/api/sayfa/:slug`
-- Koyu/açık tema ve mobil uyumlu arayüz
+## Durum
 
-## Kurulum
+| Aşama | İçerik | Durum |
+|---|---|---|
+| 1 | Veri hattı ve mastery kuralları | ✅ |
+| 2 | Hesaplayıcı (eşya listesi, işaretleme, MR/Legendary ilerlemesi) | ⏳ |
+| 3 | Efor modeli (edinme yöntemi, süre, drop olasılığı, engeller) | ⏳ |
+| 4 | Rehber / yol haritası | ⏳ |
+| 5 | Cilalama ve yayın | ⏳ |
 
-Node.js **22.13+** gerekir (yerleşik `node:sqlite` kullanılıyor; ayrı veritabanı kurulumu yok).
+Güncel özet için **[data/rapor.md](data/rapor.md)** dosyasına bak.
+
+## Veri hattı
 
 ```bash
 npm install
-npm start          # http://localhost:3000
-npm run dev        # dosya değişince yeniden başlatır
+npm run build:data   # data/raw → data/mastery-data.json + data/rapor.md
 npm test
+
+# Kaynakları wiki'den yeniden indirmek için (oyun güncellemesinden sonra):
+NODE_USE_ENV_PROXY=1 npm run fetch   # proxy yoksa NODE_USE_ENV_PROXY gerekmez
+npm run build:data
 ```
 
-İlk çalıştırmada `data/wiki.db` oluşturulur ve örnek sayfalar eklenir.
-Ortam değişkenleri: `PORT` (varsayılan 3000), `WIKI_DB` (veritabanı dosya yolu).
+- **Hangi eşya ne kadar mastery verir:** [wiki.warframe.com](https://wiki.warframe.com) veri modülleri (`Module:Weapons/data/*`, `Module:Warframes/data`, `Module:Companions/data`, `Module:Missions/data`). Bunlar, wiki'nin "Total Mastery" tablosunda kullandığı filtrelerle okunur. Lua dosyaları [fengari](https://github.com/fengari-lua/fengari) ile çalıştırılır.
+- **Nasıl elde edilir:** [@wfcd/items](https://github.com/WFCD/warframe-items) (resmi oyun verisinden üretilen topluluk paketi). İçerdikleri: üretim maliyeti ve süresi, bileşenler, drop olasılıkları, vault durumu.
+- **Sınırlı erişimli eşyalar:** wiki'nin *Exclusive Mastery* ve *Hidden Mastery* sayfaları.
+- **Doğrulama:** Derleme sonunda her kategorinin adet ve XP değeri wiki'deki *Total Mastery* tablosuyla karşılaştırılır; uyuşmazlık derlemeyi durdurur.
+
+Ham kaynaklar `data/raw/` altında saklanır. Böylece derleme çevrimdışı çalışır ve kaynak verideki her değişiklik git diff'inde görünür.
 
 ## Proje yapısı
 
 ```
-server.js            giriş noktası
-src/app.js           Express rotaları
-src/db.js            SQLite şeması ve veri erişimi (sayfalar, sürümler, arama)
-src/categories.js    kategoriler ve infobox alanları — yeni kategori buraya eklenir
-src/markdown.js      Markdown → güvenli HTML, wiki bağlantıları, içindekiler
-src/views.js         HTML şablonları
-src/seed.js          örnek içerik
-public/style.css     stil
-test/                testler (node:test)
+src/mastery.js            mastery kuralları (rank eşikleri, eşya XP'si, Forma) — arayüzde de kullanılacak
+scripts/fetch-sources.js  wiki kaynaklarını data/raw/ altına indirir
+scripts/build-data.js     kaynakları birleştirir, doğrular, çıktıları yazar
+scripts/lib/lua.js        wiki Lua veri modüllerini JS nesnesine çevirir
+scripts/lib/report.js     data/rapor.md üretir
+data/mastery-data.json    derlenmiş veri (eşyalar, görevler, Intrinsic'ler)
+test/                     node:test testleri
 ```
 
-## Yol haritası (öneriler)
+### `mastery-data.json` şeması (özet)
 
-- Kullanıcı hesapları ve düzenleme yetkileri / spam koruması
-- Görsel yükleme
-- İki sürüm arasında fark (diff) görüntüleme
-- Silah/mod verilerini topluluk kaynaklarından içe aktarma
-- Build (mod yapısı) planlayıcı
+```jsonc
+{
+  "meta": { "generatedFrom": {...}, "totals": { "items", "starChart", "steelPath", "intrinsics", "all" } },
+  "categories": { "primary": { "label": "Birincil silah", "perRank": 100, "gild": false }, ... },
+  "items": [{
+    "id": "kuva-bramma", "name": "Kuva Bramma", "category": "primary",
+    "maxRank": 40, "mastery": 4000, "forma": 5, "gild": false, "masteryReq": 15,
+    "exclusive": null,          // ya da { group, label, acquisition, impossible }
+    "acquisition": { "tradable", "vaulted", "marketCost", "bpCost", "buildPrice", "buildTimeSec", "drops", "components" }
+  }],
+  "starChart": { "nodes": [{ "name", "planet", "type", "xp" }], "junctions": [...], "steelPathRepeats": true },
+  "intrinsics": { "railjack": { "trees", "maxRank", "xpPerRank" }, "drifter": {...} }
+}
+```
 
-> Örnek içerikteki oyun değerleri güncellemelerle değişebilir; wiki üzerinden düzeltilmelidir.
-> Warframe, Digital Extremes'in ticari markasıdır. Bu proje resmi değildir.
+## Lisans ve atıf
+
+Wiki verileri [CC BY-SA](https://wiki.warframe.com) lisanslıdır. Warframe, Digital Extremes'in ticari markasıdır; bu proje resmi değildir.

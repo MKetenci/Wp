@@ -1,0 +1,121 @@
+{
+  "version": "Update 42.0 (2026-03-25)",
+  "rows": {
+    "Warframes": {
+      "count": 119,
+      "xp": 714000
+    },
+    "Primaries": {
+      "count": 196,
+      "xp": 612000
+    },
+    "Secondaries": {
+      "count": 148,
+      "xp": 458000
+    },
+    "Melee (including Zaws )": {
+      "count": 236,
+      "xp": 720000
+    },
+    "Kitguns": {
+      "count": 6,
+      "xp": 18000
+    },
+    "Normal Missions (nodes + Junctions )": {
+      "count": 254,
+      "xp": 27569
+    },
+    "The Steel Path (nodes + Junctions )": {
+      "count": 254,
+      "xp": 27569
+    },
+    "Railjack Intrinsics": {
+      "count": 50,
+      "xp": 75000
+    },
+    "Drifter Intrinsics": {
+      "count": 40,
+      "xp": 60000
+    },
+    "Sentinels": {
+      "count": 17,
+      "xp": 102000
+    },
+    "Sentinel Weapons": {
+      "count": 24,
+      "xp": 72000
+    },
+    "Robotic Weapons": {
+      "count": 21,
+      "xp": 63000
+    },
+    "Hound Weapons": {
+      "count": 3,
+      "xp": 9000
+    },
+    "Companions": {
+      "count": 25,
+      "xp": 150000
+    },
+    "Kubrows": {
+      "count": 6,
+      "xp": 36000
+    },
+    "Kavats": {
+      "count": 5,
+      "xp": 30000
+    },
+    "Predasites": {
+      "count": 3,
+      "xp": 18000
+    },
+    "Vulpaphylas": {
+      "count": 3,
+      "xp": 18000
+    },
+    "MOAs": {
+      "count": 4,
+      "xp": 24000
+    },
+    "Hounds": {
+      "count": 3,
+      "xp": 18000
+    },
+    "Plexus": {
+      "count": 1,
+      "xp": 6000
+    },
+    "Archwings": {
+      "count": 5,
+      "xp": 30000
+    },
+    "Archguns": {
+      "count": 20,
+      "xp": 62000
+    },
+    "Archmelees": {
+      "count": 8,
+      "xp": 24000
+    },
+    "Amps": {
+      "count": 9,
+      "xp": 27000
+    },
+    "K-Drives": {
+      "count": 5,
+      "xp": 30000
+    },
+    "Necramechs": {
+      "count": 2,
+      "xp": 16000
+    },
+    "Total": {
+      "count": 1418,
+      "xp": 3225138
+    },
+    "Minus Exclusives": {
+      "count": 1304,
+      "xp": 2799138
+    }
+  }
+}

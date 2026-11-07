@@ -1,0 +1,19 @@
+{
+  "fetchedAt": "2026-11-07T22:04:41.394Z",
+  "source": "https://wiki.warframe.com",
+  "license": "CC BY-SA",
+  "files": {
+    "weapons_primary.lua": "https://wiki.warframe.com/w/Module:Weapons/data/primary",
+    "weapons_secondary.lua": "https://wiki.warframe.com/w/Module:Weapons/data/secondary",
+    "weapons_melee.lua": "https://wiki.warframe.com/w/Module:Weapons/data/melee",
+    "weapons_archwing.lua": "https://wiki.warframe.com/w/Module:Weapons/data/archwing",
+    "weapons_companion.lua": "https://wiki.warframe.com/w/Module:Weapons/data/companion",
+    "weapons_modular.lua": "https://wiki.warframe.com/w/Module:Weapons/data/modular",
+    "warframes.lua": "https://wiki.warframe.com/w/Module:Warframes/data",
+    "companions.lua": "https://wiki.warframe.com/w/Module:Companions/data",
+    "missions.lua": "https://wiki.warframe.com/w/Module:Missions/data",
+    "exclusive_mastery.wiki": "https://wiki.warframe.com/w/Exclusive_Mastery",
+    "hidden_mastery.wiki": "https://wiki.warframe.com/w/Hidden_Mastery",
+    "expected_totals.json": "https://wiki.warframe.com/w/Mastery_Rank#Total_Mastery"
+  }
+}
