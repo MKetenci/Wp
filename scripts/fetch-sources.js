@@ -1,4 +1,3 @@
-'use strict';
 /**
  * Downloads raw source data from wiki.warframe.com into data/raw/.
  * The snapshot is committed so `npm run build:data` works offline and
@@ -6,10 +5,10 @@
  *
  * Wiki content is CC BY-SA (https://wiki.warframe.com).
  */
-const fs = require('node:fs');
-const path = require('node:path');
+import fs from 'node:fs';
+import path from 'node:path';
 
-const RAW = path.join(__dirname, '..', 'data', 'raw');
+const RAW = path.join(import.meta.dirname, '..', 'data', 'raw');
 const WIKI = 'https://wiki.warframe.com';
 
 const MODULES = {

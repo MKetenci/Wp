@@ -1,11 +1,10 @@
-'use strict';
 /** Renders data/rapor.md — the human-readable summary of the built data. */
-const M = require('../../src/mastery');
+import * as M from '../../web/js/mastery.js';
 
 const fmt = (n) => n.toLocaleString('tr-TR');
 const rank = (xp) => M.rankLabel(M.rankForXp(xp));
 
-module.exports = function renderReport({ data, checks, expected, joined, problems, warnings = [] }) {
+export default function renderReport({ data, checks, expected, joined, problems, warnings = [] }) {
   const { items, starChart, meta } = data;
   const sum = (list) => list.reduce((s, i) => s + i.mastery, 0);
   const t = meta.totals;

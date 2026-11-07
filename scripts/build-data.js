@@ -1,4 +1,3 @@
-'use strict';
 /**
  * Builds data/mastery-data.json and data/rapor.md from the raw wiki snapshot
  * (data/raw/, see fetch-sources.js) and the @wfcd/items package.
@@ -10,13 +9,14 @@
  * - Every category count/XP is checked against the wiki's rendered table;
  *   any mismatch fails the build.
  */
-const fs = require('node:fs');
-const path = require('node:path');
-const Items = require('@wfcd/items');
-const { loadLuaTable } = require('./lib/lua');
-const M = require('../src/mastery');
+import fs from 'node:fs';
+import path from 'node:path';
+import Items from '@wfcd/items';
+import { loadLuaTable } from './lib/lua.js';
+import renderReport from './lib/report.js';
+import * as M from '../web/js/mastery.js';
 
-const ROOT = path.join(__dirname, '..');
+const ROOT = path.join(import.meta.dirname, '..');
 const RAW = path.join(ROOT, 'data', 'raw');
 const raw = (f) => path.join(RAW, f);
 const WIKI = 'https://wiki.warframe.com/w/';
@@ -301,7 +301,26 @@ const data = {
   intrinsics,
 };
 fs.writeFileSync(path.join(ROOT, 'data', 'mastery-data.json'), JSON.stringify(data, null, 1) + '\n');
-fs.writeFileSync(path.join(ROOT, 'data', 'rapor.md'), require('./lib/report')({ data, checks, expected, joined, problems, warnings }));
+
+// Slim copy for the web app: no drop/component details (those come in phase 3).
+const webData = {
+  meta: data.meta,
+  categories: data.categories,
+  items: items.map((i) => ({
+    id: i.id, name: i.name, category: i.category, mastery: i.mastery, maxRank: i.maxRank,
+    masteryReq: i.masteryReq, gild: i.gild, isPrime: !!i.isPrime, wikiUrl: i.wikiUrl,
+    vaulted: !!i.acquisition?.vaulted, tradable: !!i.acquisition?.tradable,
+    exclusive: i.exclusive ? { group: i.exclusive.group, label: i.exclusive.label, impossible: i.exclusive.impossible } : null,
+    hidden: i.hiddenOnProfile ? (i.hiddenOnProfile.acquisition || true) : null,
+  })),
+  starChart: {
+    nodes: nodes.map(({ name, planet, type, xp }) => ({ name, planet, type, xp })),
+    junctions: junctions.map(({ name, planet, xp }) => ({ name, planet, xp })),
+  },
+  intrinsics,
+};
+fs.writeFileSync(path.join(ROOT, 'web', 'data', 'mastery.json'), JSON.stringify(webData) + '\n');
+fs.writeFileSync(path.join(ROOT, 'data', 'rapor.md'), renderReport({ data, checks, expected, joined, problems, warnings }));
 
 console.log(`${items.length} eşya, ${nodes.length} görev + ${junctions.length} junction, toplam ${totalXp.toLocaleString('tr-TR')} XP`);
 console.log(`WFCD eşleşmesi: ${joined}/${items.length}; exclusive: ${exclusiveCount}`);

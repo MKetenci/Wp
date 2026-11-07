@@ -1,10 +1,12 @@
-'use strict';
 /** Sanity checks on the committed build output (data/mastery-data.json). */
-const test = require('node:test');
-const assert = require('node:assert/strict');
-const M = require('../src/mastery');
-const data = require('../data/mastery-data.json');
-const expected = require('../data/raw/expected_totals.json');
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import * as M from '../web/js/mastery.js';
+import fs from 'node:fs';
+
+const readJson = (p) => JSON.parse(fs.readFileSync(new URL(p, import.meta.url), 'utf8'));
+const data = readJson('../data/mastery-data.json');
+const expected = readJson('../data/raw/expected_totals.json');
 
 const sum = (list, key = 'mastery') => list.reduce((s, x) => s + x[key], 0);
 

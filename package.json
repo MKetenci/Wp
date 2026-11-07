@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "description": "Warframe mastery hesaplayıcısı ve Legendary rehberi — veri hattı",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=20.11"
   },
   "scripts": {
+    "start": "node scripts/serve.js",
     "fetch": "node scripts/fetch-sources.js",
     "build:data": "node scripts/build-data.js",
     "test": "node --test test/*.test.js"

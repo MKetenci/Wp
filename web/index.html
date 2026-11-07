@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Warframe Mastery Hesaplayıcı</title>
+<meta name="description" content="Warframe mastery hesaplayıcısı: tamamladığın eşyaları, görevleri ve Intrinsic'leri işaretle; MR ve Legendary rank ilerlemeni gör.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 30 16 16 30 2 16Z' fill='%23d4af37'/%3E%3Cpath d='M16 9 23 16 16 23 9 16Z' fill='%230d1117'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo" aria-hidden="true">◆</span> Mastery Hesaplayıcı</div>
+  <div class="top-actions">
+    <button type="button" class="btn ghost" id="btn-export">Dışa aktar</button>
+    <label class="btn ghost" for="file-import">İçe aktar</label>
+    <input type="file" id="file-import" accept="application/json,.json" hidden>
+    <button type="button" class="btn ghost danger" id="btn-reset">Sıfırla</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" aria-live="polite">
+    <div class="hero-rank">
+      <div class="rank-label" id="rank-label">MR 0</div>
+      <div class="rank-sub"><span id="total-xp">0</span> XP</div>
+    </div>
+    <div class="hero-progress">
+      <div class="bar-head">
+        <span id="next-label">Sonraki rank</span>
+        <span id="next-remaining"></span>
+      </div>
+      <div class="bar big"><div class="bar-fill" id="next-bar"></div></div>
+      <div class="goal-row">
+        <label for="goal">Hedef</label>
+        <select id="goal"></select>
+        <span id="goal-status" class="goal-status"></span>
+      </div>
+      <div class="bar"><div class="bar-fill goal" id="goal-bar"></div></div>
+      <p class="muted small" id="reachable-note"></p>
+    </div>
+  </section>
+
+  <nav class="tabs" role="tablist">
+    <a role="tab" href="#esyalar" data-tab="esyalar">Eşyalar <span class="pill" id="tab-items"></span></a>
+    <a role="tab" href="#harita" data-tab="harita">Gezegen Haritası <span class="pill" id="tab-chart"></span></a>
+    <a role="tab" href="#intrinsic" data-tab="intrinsic">Intrinsic'ler <span class="pill" id="tab-intr"></span></a>
+    <a role="tab" href="#ozet" data-tab="ozet">Özet</a>
+  </nav>
+
+  <section class="panel" id="panel-esyalar" role="tabpanel">
+    <div class="toolbar">
+      <input type="search" id="f-search" placeholder="Eşya ara… (ör. Kuva, Prime)" aria-label="Eşya ara">
+      <select id="f-category" aria-label="Kategori"></select>
+      <select id="f-status" aria-label="Durum">
+        <option value="all">Tüm durumlar</option>
+        <option value="todo" selected>Kalanlar</option>
+        <option value="done">Tamamlananlar</option>
+      </select>
+      <select id="f-avail" aria-label="Erişilebilirlik">
+        <option value="all">Tüm erişim türleri</option>
+        <option value="normal">Normal yollarla alınabilir</option>
+        <option value="limited">Sınırlı erişimli</option>
+        <option value="impossible">Artık elde edilemez</option>
+      </select>
+      <select id="f-sort" aria-label="Sıralama">
+        <option value="name">Ada göre</option>
+        <option value="xp">XP'ye göre</option>
+        <option value="mr">Gereken MR'a göre</option>
+        <option value="category">Kategoriye göre</option>
+      </select>
+    </div>
+    <div class="list-head">
+      <span id="list-count" class="muted"></span>
+      <span class="bulk">
+        <button type="button" class="btn small" id="bulk-done">Görünenleri tamamla</button>
+        <button type="button" class="btn small ghost" id="bulk-clear">Görünenleri temizle</button>
+      </span>
+    </div>
+    <ul class="items" id="item-list"></ul>
+    <p class="empty muted" id="item-empty" hidden>Bu filtreye uyan eşya yok.</p>
+  </section>
+
+  <section class="panel" id="panel-harita" role="tabpanel" hidden>
+    <div class="chart-summary" id="chart-summary"></div>
+    <p class="muted small">Yalnızca mastery XP veren görevler listelenir. Junction'lar 1.000 XP verir. Steel Path aynı görevler için XP'yi bir kez daha verir.</p>
+    <div id="planets"></div>
+  </section>
+
+  <section class="panel" id="panel-intrinsic" role="tabpanel" hidden>
+    <p class="muted small">Her Intrinsic rankı 1.500 mastery XP verir. Her ağaçtaki mevcut rankını gir.</p>
+    <div class="intr-grid" id="intrinsics"></div>
+  </section>
+
+  <section class="panel" id="panel-ozet" role="tabpanel" hidden>
+    <h2>Kaynağa göre</h2>
+    <div id="sum-sources"></div>
+    <h2>Kategoriye göre</h2>
+    <div id="sum-categories"></div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>İlerlemen yalnızca bu tarayıcıda saklanır. Yedeklemek veya başka cihaza taşımak için <strong>Dışa aktar</strong>'ı kullan.</p>
+  <p id="data-source"></p>
+  <p>Veri: <a href="https://wiki.warframe.com" rel="noopener">wiki.warframe.com</a> (CC BY-SA) ve <a href="https://github.com/WFCD/warframe-items" rel="noopener">WFCD</a>. Warframe, Digital Extremes'in ticari markasıdır; bu site resmi değildir.</p>
+</footer>
+<div class="toast" id="toast" role="status" hidden></div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

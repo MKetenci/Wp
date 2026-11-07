@@ -1,7 +1,6 @@
-'use strict';
-const test = require('node:test');
-const assert = require('node:assert/strict');
-const M = require('../src/mastery');
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import * as M from '../web/js/mastery.js';
 
 test('rank thresholds match the wiki table', () => {
   // https://wiki.warframe.com/w/Mastery_Rank#Mastery_Ranks_Allocation

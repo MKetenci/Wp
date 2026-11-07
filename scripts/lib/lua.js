@@ -1,14 +1,15 @@
-'use strict';
 /**
  * Loads a wiki "data" Lua module (a file that does `return { ... }`) and
  * converts the returned table into plain JS. Runs on fengari, a Lua VM in JS,
  * so no native Lua install is needed. `mw` is stubbed because a few modules
  * reference it at load time.
  */
-const fs = require('node:fs');
-const { lua, lauxlib, lualib, to_luastring } = require('fengari');
+import fs from 'node:fs';
+import fengari from 'fengari';
 
-function loadLuaTable(file) {
+const { lua, lauxlib, lualib, to_luastring } = fengari;
+
+export function loadLuaTable(file) {
   const L = lauxlib.luaL_newstate();
   lualib.luaL_openlibs(L);
   lauxlib.luaL_dostring(
@@ -47,4 +48,3 @@ function toJs(L, idx) {
   return Object.fromEntries(entries);
 }
 
-module.exports = { loadLuaTable };

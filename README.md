@@ -9,12 +9,27 @@ Warframe'de mastery XP veren her şeyi (eşyalar, gezegen haritası, Steel Path,
 | Aşama | İçerik | Durum |
 |---|---|---|
 | 1 | Veri hattı ve mastery kuralları | ✅ |
-| 2 | Hesaplayıcı (eşya listesi, işaretleme, MR/Legendary ilerlemesi) | ⏳ |
+| 2 | Hesaplayıcı (eşya listesi, işaretleme, MR/Legendary ilerlemesi) | ✅ |
 | 3 | Efor modeli (edinme yöntemi, süre, drop olasılığı, engeller) | ⏳ |
 | 4 | Rehber / yol haritası | ⏳ |
 | 5 | Cilalama ve yayın | ⏳ |
 
 Güncel özet için **[data/rapor.md](data/rapor.md)** dosyasına bak.
+
+## Hesaplayıcıyı çalıştırma
+
+```bash
+npm start            # http://localhost:8080 (PORT ile değiştirilebilir)
+```
+
+`web/` klasörü derleme gerektirmeyen statik bir sitedir; herhangi bir statik sunucuda (ör. GitHub Pages) yayınlanabilir.
+
+- **Eşyalar:** 820 eşya. Ara, kategoriye/duruma/erişime göre filtrele, sırala. Rank 40 eşyalarda kısmi ilerleme (R30–R40) seçilebilir. Görünen listeyi topluca işaretleme yapılabilir.
+- **Gezegen Haritası:** XP veren görevler ve Junction'lar gezegen gezegen listelenir; normal ve Steel Path ayrı işaretlenir.
+- **Intrinsic'ler:** Railjack ve Drifter ağaçlarında rank girilir.
+- **Özet:** Kaynak ve kategori bazında kazanılan ve kalan XP.
+- **Üst panel:** Mevcut MR/Legendary rank, sonraki ranka kalan XP, seçilen hedefe kalan XP ve hedefin erişilebilir olup olmadığı.
+- **Kayıt:** İlerleme tarayıcıda (localStorage) saklanır. Dışa ve içe aktarma JSON dosyasıyla yapılır.
 
 ## Veri hattı
 
@@ -38,7 +53,13 @@ Ham kaynaklar `data/raw/` altında saklanır. Böylece derleme çevrimdışı ç
 ## Proje yapısı
 
 ```
-src/mastery.js            mastery kuralları (rank eşikleri, eşya XP'si, Forma) — arayüzde de kullanılacak
+web/index.html            hesaplayıcı arayüzü
+web/js/mastery.js         mastery kuralları (rank eşikleri, eşya XP'si, Forma) — veri hattı ve arayüz ortak kullanır
+web/js/progress.js        oyuncu ilerlemesi ve toplamlar (saf fonksiyonlar, Node'da test edilir)
+web/js/storage.js         localStorage, dışa/içe aktarma
+web/js/app.js             arayüz
+web/data/mastery.json     arayüz için sadeleştirilmiş veri (build:data üretir)
+scripts/serve.js          bağımlılıksız statik sunucu
 scripts/fetch-sources.js  wiki kaynaklarını data/raw/ altına indirir
 scripts/build-data.js     kaynakları birleştirir, doğrular, çıktıları yazar
 scripts/lib/lua.js        wiki Lua veri modüllerini JS nesnesine çevirir
