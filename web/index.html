@@ -55,6 +55,9 @@
       <label><input type="checkbox" id="opt-noPlat"> Platin harcamadan</label>
       <label><input type="checkbox" id="opt-includeLimited"> Sınırlı erişimlileri dahil et <span class="muted small">(Baro, etkinlik, Prime Vault…)</span></label>
       <label><input type="checkbox" id="opt-includeLowConfidence"> Kaynağı tahmini eşyaları dahil et</label>
+      <label><input type="checkbox" id="opt-chartFirst"> Önce gezegen haritasını bitir <span class="muted small">(yeni oyuncular için)</span></label>
+      <label class="speed">Seviye atlatma hızım <select id="speed-levelSpeed"></select></label>
+      <label class="speed">Farm hızım <select id="speed-farmSpeed"></select></label>
     </div>
     <div class="plan-cards" id="plan-cards"></div>
     <div class="milestones" id="plan-milestones"></div>
@@ -65,7 +68,9 @@
     <details class="plan-how">
       <summary>Bu rota nasıl hesaplanıyor?</summary>
       <p>Eksik olan her şey bir adım sayılır: eşyalar, gezegen haritası ve Steel Path (gezegen başına) ve Intrinsic rankları. Her adımın mastery XP'si ve tahmini aktif süresi vardır. Rota her seferinde, o an yapılabilecek adımlar arasından <strong>saat başına en çok XP</strong> vereni seçer. "Yapılabilir" şu demektir: gereken MR, o ana kadar toplanan XP ile karşılanmış olmalı; Intrinsic rankları sırayla açılır; Steel Path için normal harita bitmiş olmalı.</p>
-      <p>Süreler tahmindir: görev süreleri, seviye atlatma ve kaynak farmı için varsayımlar kullanılır (ayrıntılar <code>data/rapor.md</code> dosyasında). Syndicate rütbesi, klan araştırması ve quest gibi önkoşullar süreye eklenmez; eşya detayında listelenir. Rank testleri ve Foundry bekleme süreleri dahil değildir.</p>
+      <p>Süreler <strong>tahmindir</strong> ve ölçülmüş değerler değildir. Şu anki varsayımlar (hız ayarların uygulanmış hâliyle):</p>
+      <ul id="plan-assumptions"></ul>
+      <p>Syndicate rütbesi, klan araştırması ve quest gibi önkoşullar süreye eklenmez; eşya detayında listelenir. Rank testleri, Foundry bekleme süreleri ve platin/takas maliyetleri dahil değildir.</p>
     </details>
   </section>
 

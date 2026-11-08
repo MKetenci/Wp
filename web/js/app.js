@@ -1,8 +1,8 @@
 import { CATEGORIES, MR_MAX, rankLabel, xpForRank } from './mastery.js';
-import { computeProgress, emptyState, goalStatus, itemXp, nodeKey, validRanks } from './progress.js';
+import { SPEED_STEPS, computeProgress, emptyState, goalStatus, itemXp, nodeKey, validRanks } from './progress.js';
 import { exportState, loadState, readImportFile, saveState } from './storage.js';
-import { METHODS, estimateEffort } from './effort.js';
-import { phases, planRoute } from './planner.js';
+import { METHODS, configFor, estimateEffort } from './effort.js';
+import { PLAN_DEFAULTS, phases, planRoute } from './planner.js';
 
 const $ = (sel) => document.querySelector(sel);
 const fmt = (n) => Math.round(n).toLocaleString('tr-TR');
@@ -43,11 +43,9 @@ async function boot() {
     document.querySelector('main').innerHTML = `<p class="error">Veri yüklenemedi (${esc(err.message)}). Sayfayı bir web sunucusu üzerinden aç: <code>npm start</code></p>`;
     return;
   }
-  for (const i of data.items) {
-    itemsById.set(i.id, i);
-    effortById.set(i.id, estimateEffort(i, i.acq));
-  }
+  for (const i of data.items) itemsById.set(i.id, i);
   state = loadState(data);
+  recomputeEfforts();
 
   setupHeader();
   setupItems();
@@ -133,8 +131,28 @@ function setupTabs() {
 // ------------------------------------------------------------ plan ---
 
 let planSteps = new Map();
+let effortCfg = configFor();
+
+/** Effort estimates depend on the player's speed settings. */
+function recomputeEfforts() {
+  effortCfg = configFor(state.speed);
+  for (const i of data.items) effortById.set(i.id, estimateEffort(i, i.acq, effortCfg));
+}
+
+const SPEED_LABELS = { 0.5: 'Çok hızlı (×0,5)', 0.75: 'Hızlı (×0,75)', 1: 'Normal', 1.5: 'Yavaş (×1,5)', 2: 'Çok yavaş (×2)' };
 
 function setupPlan() {
+  for (const key of Object.keys(state.speed)) {
+    const sel = $(`#speed-${key}`);
+    sel.innerHTML = SPEED_STEPS.map((v) => `<option value="${v}">${SPEED_LABELS[v]}</option>`).join('');
+    sel.value = String(state.speed[key]);
+    sel.addEventListener('change', () => {
+      state.speed[key] = Number(sel.value);
+      recomputeEfforts();
+      renderItems();
+      refresh();
+    });
+  }
   for (const key of Object.keys(state.plan)) {
     const box = $(`#opt-${key}`);
     box.checked = state.plan[key];
@@ -165,6 +183,18 @@ function completeStep(step) {
   toast(`✓ ${step.name} tamamlandı olarak işaretlendi.`);
 }
 
+function renderAssumptions() {
+  const c = effortCfg;
+  const f = state.speed.farmSpeed;
+  const mins = (needle) => Math.round(c.attemptMinutes.find(([re]) => re.test(needle))[1]);
+  $('#plan-assumptions').innerHTML = [
+    `Seviye atlatma (0→30, bir tur): silah ${hrs(c.levelHours.weapon)}, Warframe ${hrs(c.levelHours.warframe)}, yoldaş ${hrs(c.levelHours.companion)}, Archwing/K-Drive/Necramech ${hrs(c.levelHours.archwing)}. Rank 40 eşyalarda her Forma bir tur daha; gilding gerekenlerde iki tur.`,
+    `Drop farmı: her parça için beklenen süresi en kısa kaynak seçilir; aynı ödül tablosundaki parçalar "kupon toplama" formülüyle hesaplanır. Deneme süresi örnekleri: suikast ${mins('X (Assassination)')} dk, bounty ${mins('Cetus Bounty')} dk, relic ${mins('Lith A1 Relic')} dk, düşman başına ${Math.round(c.enemyKillMinutes * 60)} sn.`,
+    `Kaynak verisi olmayan yöntemler: Kuva Lich/Sister/Coda ${hrs(c.methodHours.adversary)}, quest ${hrs(c.methodHours.quest)}, satıcı ${hrs(c.methodHours.vendor)}, Dojo ${hrs(c.methodHours.dojo)}.`,
+    `Gezegen haritası: görev başına ${Math.round(PLAN_DEFAULTS.starChartNodeMinutes * f)} dk, Steel Path ${Math.round(PLAN_DEFAULTS.steelPathNodeMinutes * f)} dk. Intrinsic puanı: Railjack ${hrs(PLAN_DEFAULTS.intrinsicPointHours.railjack * f)}, Drifter ${hrs(PLAN_DEFAULTS.intrinsicPointHours.drifter * f)} (rank r için r puan gerekir).`,
+  ].map((t) => `<li>${esc(t)}</li>`).join('');
+}
+
 function stepRow(s, { showGroup = false } = {}) {
   const item = s.itemId ? itemsById.get(s.itemId) : null;
   const name = item ? `<a href="${esc(item.wikiUrl)}" target="_blank" rel="noopener">${esc(s.name)}</a>` : esc(s.name);
@@ -178,9 +208,10 @@ function stepRow(s, { showGroup = false } = {}) {
 }
 
 function renderPlan() {
-  const route = planRoute(data, state, state.goal, state.plan);
+  const route = planRoute(data, state, state.goal, { ...state.plan, farmSpeed: state.speed.farmSpeed }, effortCfg);
   planSteps = new Map(route.steps.map((s) => [s.id, s]));
   $('#plan-goal').textContent = rankLabel(state.goal);
+  renderAssumptions();
 
   const sk = route.skipped;
   const excluded = [
@@ -576,7 +607,7 @@ function renderSummary() {
   }
   const mrows = Object.entries(byMethod).sort((a, b) => b[1].xp - a[1].xp);
   const tot = mrows.reduce((s, [k, m]) => s + (METHODS[k].limited || METHODS[k].impossible ? 0 : m.h), 0);
-  $('#sum-methods').innerHTML = `<p class="muted small">Sınırlı erişimli olmayan kalan eşyalar için tahmini toplam aktif süre: <strong>${hrs(tot)}</strong>. Süreler tahminidir (varsayımlar için bkz. data/rapor.md).</p>
+  $('#sum-methods').innerHTML = `<p class="muted small">Sınırlı erişimli olmayan kalan eşyalar için tahmini toplam aktif süre: <strong>${hrs(tot)}</strong>. Süreler tahminidir (varsayımlar: Yol Haritası → "Bu rota nasıl hesaplanıyor?").</p>
     <table class="grid"><thead><tr><th>Edinme yöntemi</th><th class="num">Kalan eşya</th><th class="num">Kalan XP</th><th class="num">Tahmini süre</th><th class="num">XP/saat</th></tr></thead><tbody>${mrows
       .map(([k, m]) => `<tr><td>${esc(METHODS[k].label)}</td><td class="num">${m.n}</td><td class="num">${fmt(m.xp)}</td><td class="num">${METHODS[k].impossible ? '—' : hrs(m.h)}</td><td class="num">${m.h ? fmt(m.xp / m.h) : '—'}</td></tr>`)
       .join('')}</tbody></table>`;
@@ -613,6 +644,9 @@ function setupFileActions() {
 
 function replaceState(next) {
   state = next;
+  recomputeEfforts();
+  for (const key of Object.keys(state.plan)) $(`#opt-${key}`).checked = state.plan[key];
+  for (const key of Object.keys(state.speed)) $(`#speed-${key}`).value = String(state.speed[key]);
   $('#goal').value = String(state.goal);
   renderItems();
   renderPlanets();

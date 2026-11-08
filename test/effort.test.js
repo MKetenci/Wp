@@ -72,3 +72,20 @@ test('known items are classified as expected', () => {
   assert.ok(item('Nidus').acq.requires.includes('Görev: The Glast Gambit'));
   assert.ok(item('Sibear').acq.requires.some((r) => r.startsWith('Magistar')));
 });
+
+test('configFor scales levelling and farming independently', async () => {
+  const { configFor } = await import('../web/js/effort.js');
+  const kuva = item('Kuva Bramma');
+  const gauss = item('Gauss');
+  const base = estimateEffort(gauss, gauss.acq);
+  const fastLevel = estimateEffort(gauss, gauss.acq, configFor({ levelSpeed: 0.5, farmSpeed: 1 }));
+  const slowFarm = estimateEffort(gauss, gauss.acq, configFor({ levelSpeed: 1, farmSpeed: 2 }));
+  close(fastLevel.levelHours, base.levelHours / 2);
+  close(fastLevel.acquireHours, base.acquireHours);
+  close(slowFarm.acquireHours, base.acquireHours * 2);
+  close(slowFarm.levelHours, base.levelHours);
+  // Forma time counts as farming, not levelling cycles
+  const k = estimateEffort(kuva, kuva.acq, configFor({ levelSpeed: 0.5, farmSpeed: 1 }));
+  close(k.levelHours, 0.25 * 6 + 5 * 0.2);
+  assert.deepEqual(configFor().levelHours, DEFAULTS.levelHours);
+});

@@ -76,3 +76,11 @@ test('sanitizeState drops junk and clamps values', () => {
   assert.equal(s.goal, 30);
   assert.deepEqual(sanitizeState(null, data), emptyState());
 });
+
+test('sanitizeState keeps valid plan options and speed steps only', () => {
+  const s = sanitizeState({ plan: { noPlat: true, chartFirst: 'yes' }, speed: { levelSpeed: 0.5, farmSpeed: 3 } }, data);
+  assert.equal(s.plan.noPlat, true);
+  assert.equal(s.plan.chartFirst, false);
+  assert.equal(s.speed.levelSpeed, 0.5);
+  assert.equal(s.speed.farmSpeed, 1);
+});

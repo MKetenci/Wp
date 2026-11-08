@@ -188,3 +188,27 @@ export function estimateEffort(item, acq, cfg = DEFAULTS) {
     impossible: !!meta.impossible,
   };
 }
+
+/** Player-specific speed settings (1 = defaults). */
+export const SPEED_DEFAULTS = { levelSpeed: 1, farmSpeed: 1 };
+
+/**
+ * DEFAULTS scaled by the player's speed: `levelSpeed` multiplies levelling
+ * time, `farmSpeed` multiplies every acquisition time (mission minutes, fixed
+ * method hours, resources, Forma). 0.5 = twice as fast, 2 = twice as slow.
+ */
+export function configFor(speed = SPEED_DEFAULTS, base = DEFAULTS) {
+  const lv = speed.levelSpeed ?? 1;
+  const fm = speed.farmSpeed ?? 1;
+  const scale = (obj, f) => Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, v * f]));
+  return {
+    ...base,
+    levelHours: scale(base.levelHours, lv),
+    formaHours: base.formaHours * fm,
+    attemptMinutes: base.attemptMinutes.map(([re, min]) => [re, min * fm]),
+    defaultAttemptMinutes: base.defaultAttemptMinutes * fm,
+    enemyKillMinutes: base.enemyKillMinutes * fm,
+    methodHours: scale(base.methodHours, fm),
+    resourceHours: scale(base.resourceHours, fm),
+  };
+}

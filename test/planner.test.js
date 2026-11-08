@@ -83,3 +83,17 @@ test('farm place labels are groupable', () => {
   assert.equal(farmPlace('Sedna/Kappa (Disruption), Rotation C'), 'Sedna/Kappa (Disruption)');
   assert.equal(farmPlace('Earth/Cetus (Level 50 - 70 Cetus Bounty), Rotation B'), 'Earth/Cetus (Cetus Bounty)');
 });
+
+test('chartFirst finishes the star chart before anything else', () => {
+  const r = planRoute(data, emptyState(), 30, { chartFirst: true });
+  const kinds = r.steps.map((s) => s.kind);
+  const lastChart = kinds.lastIndexOf('chart');
+  assert.ok(lastChart >= 0);
+  assert.ok(kinds.slice(0, lastChart + 1).every((k) => k === 'chart'));
+});
+
+test('farmSpeed scales star chart and intrinsic time', () => {
+  const t1 = buildTasks(data, emptyState(), {}).tasks.find((t) => t.id === 'chart:Eris');
+  const t2 = buildTasks(data, emptyState(), { farmSpeed: 2 }).tasks.find((t) => t.id === 'chart:Eris');
+  assert.ok(Math.abs(t2.hours - 2 * t1.hours) < 1e-9);
+});

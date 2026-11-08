@@ -12,7 +12,7 @@ Warframe'de mastery XP veren her şeyi (eşyalar, gezegen haritası, Steel Path,
 | 2 | Hesaplayıcı (eşya listesi, işaretleme, MR/Legendary ilerlemesi) | ✅ |
 | 3 | Efor modeli (edinme yöntemi, süre, drop olasılığı, engeller) | ✅ |
 | 4 | Rehber / yol haritası | ✅ |
-| 5 | Cilalama ve yayın | ⏳ |
+| 5 | Cilalama ve yayın | ✅ |
 
 Güncel özet için **[data/rapor.md](data/rapor.md)** dosyasına bak.
 
@@ -30,7 +30,7 @@ npm start            # http://localhost:8080 (PORT ile değiştirilebilir)
   - "sıradaki 10 adım"
   - rank aşamalarına bölünmüş, aynı faaliyetten çıkan eşyaları birlikte gösteren gruplar (Market, Dojo laboratuvarı, satıcı, farm yeri, Kuva Lich…)
 
-  Ayarlar: *platin harcamadan*, *sınırlı erişimlileri dahil et*, *kaynağı tahmini eşyaları dahil et*. Her adım tek tıkla tamamlandı olarak işaretlenebilir; rota anında güncellenir.
+  Ayarlar: *platin harcamadan*, *sınırlı erişimlileri dahil et*, *kaynağı tahmini eşyaları dahil et*, *önce gezegen haritasını bitir* (yeni oyuncular için), ayrıca kişisel **seviye atlatma** ve **farm hızı** (×0,5 – ×2). Hız ayarları tüm süre tahminlerini değiştirir; geçerli varsayımlar "Bu rota nasıl hesaplanıyor?" bölümünde listelenir. Her adım tek tıkla tamamlandı olarak işaretlenebilir; rota anında güncellenir.
 - **Eşyalar:** 820 eşya. Ara, kategoriye/duruma/erişime göre filtrele, sırala. Rank 40 eşyalarda kısmi ilerleme (R30–R40) seçilebilir. Görünen listeyi topluca işaretleme yapılabilir.
 - **Gezegen Haritası:** XP veren görevler ve Junction'lar gezegen gezegen listelenir; normal ve Steel Path ayrı işaretlenir.
 - **Intrinsic'ler:** Railjack ve Drifter ağaçlarında rank girilir.
@@ -38,6 +38,17 @@ npm start            # http://localhost:8080 (PORT ile değiştirilebilir)
 - **Özet:** Kaynak, kategori ve edinme yöntemi bazında kazanılan/kalan XP ve kalan eşyalar için tahmini süre.
 - **Üst panel:** Mevcut MR/Legendary rank, sonraki ranka kalan XP, seçilen hedefe kalan XP ve hedefin erişilebilir olup olmadığı.
 - **Kayıt:** İlerleme tarayıcıda (localStorage) saklanır. Dışa ve içe aktarma JSON dosyasıyla yapılır.
+
+## Yayın (GitHub Pages)
+
+`.github/workflows/pages.yml` her push'ta veriyi yeniden derler, derlenmiş verinin depodakiyle aynı olduğunu doğrular ve testleri çalıştırır. Varsayılan dala yapılan push'larda `web/` klasörünü GitHub Pages'e yayınlar. Yayını açmak için:
+
+1. **Settings → Pages → Build and deployment → Source:** *GitHub Actions* seç.
+   - Özel (private) depolarda Pages yalnızca GitHub Pro/Team/Enterprise planlarında kullanılabilir. Ücretsiz planda depoyu herkese açık yapmak gerekir.
+2. **Settings → Secrets and variables → Actions → Variables:** `PAGES_ENABLED` adında, değeri `true` olan bir depo değişkeni ekle.
+3. **Actions → "Test ve yayın" → Run workflow** ile çalıştır (veya varsayılan dala bir push yap).
+
+Bu değişken ayarlanana kadar iş akışı yalnızca testleri çalıştırır.
 
 ## Veri hattı
 
@@ -111,6 +122,17 @@ test/                     node:test testleri
   "intrinsics": { "railjack": { "trees", "maxRank", "xpPerRank" }, "drifter": {...} }
 }
 ```
+
+## Oyun güncellemesinden sonra
+
+```bash
+NODE_USE_ENV_PROXY=1 npm run fetch   # wiki kaynaklarını yenile
+npm install -D @wfcd/items@latest    # edinme verisini güncelle
+npm run build:data                   # doğrulama hata verirse data/rapor.md'ye bak
+npm test
+```
+
+Yeni eşyaların kaynağı bulunamazsa `data/rapor.md` içindeki "Düşük güvenli sınıflandırmalar" listesinde görünür. Bunlar `data/acquisition-overrides.json` dosyasına eklenerek düzeltilir.
 
 ## Lisans ve atıf
 

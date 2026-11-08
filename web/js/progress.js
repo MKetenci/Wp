@@ -10,19 +10,24 @@
  *   steelPath: { [nodeKey]: true },   // same keys, Steel Path
  *   intrinsics: { railjack: { Tactical: 0..10, ... }, drifter: { ... } },
  *   goal: 36,                         // target rank (31 = L1)
- *   plan: { noPlat, includeLimited, includeLowConfidence }   // route planner options
+ *   plan: { noPlat, includeLimited, includeLowConfidence, chartFirst },  // route planner options
+ *   speed: { levelSpeed, farmSpeed }  // personal speed multipliers for the effort model
  * }
  */
 import { CATEGORIES, MR_MAX, rankForXp, xpForRank } from './mastery.js';
 
 export const STATE_VERSION = 1;
 
+/** Allowed speed multipliers (0.5 = twice as fast as the defaults). */
+export const SPEED_STEPS = [0.5, 0.75, 1, 1.5, 2];
+
 export const nodeKey = (node) => `${node.planet}/${node.name}`;
 
 export function emptyState() {
   return {
     version: STATE_VERSION, items: {}, nodes: {}, steelPath: {}, intrinsics: { railjack: {}, drifter: {} }, goal: MR_MAX,
-    plan: { noPlat: false, includeLimited: false, includeLowConfidence: true },
+    plan: { noPlat: false, includeLimited: false, includeLowConfidence: true, chartFirst: false },
+    speed: { levelSpeed: 1, farmSpeed: 1 },
   };
 }
 
@@ -69,6 +74,10 @@ export function sanitizeState(raw, data) {
   }
 
   for (const k of Object.keys(state.plan)) if (typeof raw.plan?.[k] === 'boolean') state.plan[k] = raw.plan[k];
+  for (const k of Object.keys(state.speed)) {
+    const v = Number(raw.speed?.[k]);
+    if (SPEED_STEPS.includes(v)) state.speed[k] = v;
+  }
 
   const goal = Math.trunc(Number(raw.goal));
   if (goal >= 1 && goal <= 60) state.goal = goal;

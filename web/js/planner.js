@@ -18,6 +18,8 @@ import { computeProgress, itemXp, nodeKey } from './progress.js';
 
 export const PLAN_DEFAULTS = {
   noPlat: false,               // skip things that need platinum (Market-for-plat, Prime Vault trading)
+  chartFirst: false,           // finish the normal star chart before anything else (new players)
+  farmSpeed: 1,                // scales star chart / intrinsic time like effort.configFor does
   includeLimited: false,       // include things you can't farm on demand (Baro, events, invasions, …)
   includeLowConfidence: true,  // include items whose acquisition was guessed
   starChartNodeMinutes: 6,
@@ -102,7 +104,7 @@ export function buildTasks(data, state, opts = {}, effortCfg = EFFORT_DEFAULTS) 
     for (const [field, kind] of [['nodes', 'chart'], ['steelPath', 'sp']]) {
       const todo = nodes.filter((n) => !state[field][nodeKey(n)]);
       if (!todo.length) continue;
-      const minutes = todo.reduce((s, n) => {
+      const minutes = o.farmSpeed * todo.reduce((s, n) => {
         const junction = !n.type;
         if (kind === 'sp') return s + (junction ? o.junctionMinutes : o.steelPathNodeMinutes);
         return s + (junction ? o.junctionMinutes : o.starChartNodeMinutes);
@@ -123,7 +125,7 @@ export function buildTasks(data, state, opts = {}, effortCfg = EFFORT_DEFAULTS) 
       for (let r = have + 1; r <= def.maxRank; r++) {
         tasks.push({
           id: `intr:${kind}:${tree}:${r}`, kind: 'intrinsic', name: `${tree} ${r}`, sub: def.label,
-          xp: def.xpPerRank, hours: r * o.intrinsicPointHours[kind], mrReq: 0,
+          xp: def.xpPerRank, hours: r * o.intrinsicPointHours[kind] * o.farmSpeed, mrReq: 0,
           group: { key: `intr:${kind}`, label: def.label },
           after: r > have + 1 ? `intr:${kind}:${tree}:${r - 1}` : null,
         });
@@ -132,7 +134,7 @@ export function buildTasks(data, state, opts = {}, effortCfg = EFFORT_DEFAULTS) 
   }
 
   for (const t of tasks) t.xpPerHour = t.hours > 0 ? t.xp / t.hours : Number.MAX_VALUE;
-  return { tasks, skipped };
+  return { tasks, skipped, chartFirst: o.chartFirst };
 }
 
 /**
@@ -143,8 +145,9 @@ export function buildTasks(data, state, opts = {}, effortCfg = EFFORT_DEFAULTS) 
 export function planRoute(data, state, goal, opts = {}, effortCfg = EFFORT_DEFAULTS) {
   const startXp = computeProgress(data, state).total;
   const goalXp = xpForRank(goal);
-  const { tasks, skipped } = buildTasks(data, state, opts, effortCfg);
-  const pool = [...tasks].sort((a, b) => b.xpPerHour - a.xpPerHour);
+  const { tasks, skipped, chartFirst } = buildTasks(data, state, opts, effortCfg);
+  const first = (t) => (chartFirst && t.kind === 'chart' ? 1 : 0);
+  const pool = [...tasks].sort((a, b) => first(b) - first(a) || b.xpPerHour - a.xpPerHour);
   const done = new Set();
   let chartLeft = tasks.filter((t) => t.kind === 'chart').length;
 
