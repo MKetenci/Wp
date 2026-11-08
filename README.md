@@ -11,7 +11,7 @@ Warframe'de mastery XP veren her şeyi (eşyalar, gezegen haritası, Steel Path,
 | 1 | Veri hattı ve mastery kuralları | ✅ |
 | 2 | Hesaplayıcı (eşya listesi, işaretleme, MR/Legendary ilerlemesi) | ✅ |
 | 3 | Efor modeli (edinme yöntemi, süre, drop olasılığı, engeller) | ✅ |
-| 4 | Rehber / yol haritası | ⏳ |
+| 4 | Rehber / yol haritası | ✅ |
 | 5 | Cilalama ve yayın | ⏳ |
 
 Güncel özet için **[data/rapor.md](data/rapor.md)** dosyasına bak.
@@ -24,6 +24,13 @@ npm start            # http://localhost:8080 (PORT ile değiştirilebilir)
 
 `web/` klasörü derleme gerektirmeyen statik bir sitedir; herhangi bir statik sunucuda (ör. GitHub Pages) yayınlanabilir.
 
+- **Yol Haritası:** Mevcut ilerlemen ve seçtiğin hedef (MR veya Legendary) için en az aktif sürede hedefe ulaştıran sıralı rota. İçerik:
+  - hedefe kalan XP, tahmini süre, adım sayısı ve ulaşılabilirlik
+  - her ranka kaç saatte ulaşılacağı
+  - "sıradaki 10 adım"
+  - rank aşamalarına bölünmüş, aynı faaliyetten çıkan eşyaları birlikte gösteren gruplar (Market, Dojo laboratuvarı, satıcı, farm yeri, Kuva Lich…)
+
+  Ayarlar: *platin harcamadan*, *sınırlı erişimlileri dahil et*, *kaynağı tahmini eşyaları dahil et*. Her adım tek tıkla tamamlandı olarak işaretlenebilir; rota anında güncellenir.
 - **Eşyalar:** 820 eşya. Ara, kategoriye/duruma/erişime göre filtrele, sırala. Rank 40 eşyalarda kısmi ilerleme (R30–R40) seçilebilir. Görünen listeyi topluca işaretleme yapılabilir.
 - **Gezegen Haritası:** XP veren görevler ve Junction'lar gezegen gezegen listelenir; normal ve Steel Path ayrı işaretlenir.
 - **Intrinsic'ler:** Railjack ve Drifter ağaçlarında rank girilir.
@@ -60,6 +67,8 @@ npm run build:data
 - **Kaynaklar:** Nadir kaynaklar birim başına sabit süreyle hesaplanır.
 - **Seviye atlatma:** Forma ve gilding ek turları dahil edilir.
 
+`web/js/planner.js` rotayı kurar. Eksik olan her şey (eşyalar, gezegen haritası ve Steel Path gezegen başına, Intrinsic rankları) bir adım olur. Her adımda o an yapılabilecekler arasından saat başına en çok XP veren seçilir. "Yapılabilir" şu demektir: MR şartı, o ana kadar toplanan XP ile karşılanır; Intrinsic rankları sırayla açılır; Steel Path normal harita bitince açılır. Sıfırdan başlayan bir oyuncu için senaryo karşılaştırması `data/rapor.md` dosyasındadır.
+
 Tüm varsayımlar `DEFAULTS` nesnesinde toplanır ve `data/rapor.md`'de listelenir. Sonuçlar **tahmindir**; ölçülmüş değerler değildir.
 
 Ham kaynaklar `data/raw/` altında saklanır. Böylece derleme çevrimdışı çalışır ve kaynak verideki her değişiklik git diff'inde görünür.
@@ -71,6 +80,7 @@ web/index.html            hesaplayıcı arayüzü
 web/js/mastery.js         mastery kuralları (rank eşikleri, eşya XP'si, Forma) — veri hattı ve arayüz ortak kullanır
 web/js/progress.js        oyuncu ilerlemesi ve toplamlar (saf fonksiyonlar, Node'da test edilir)
 web/js/effort.js          efor modeli ve varsayımlar (saf fonksiyonlar)
+web/js/planner.js         rota planlayıcı (saf fonksiyonlar)
 web/js/storage.js         localStorage, dışa/içe aktarma
 web/js/app.js             arayüz
 web/data/mastery.json     arayüz için sadeleştirilmiş veri (build:data üretir)

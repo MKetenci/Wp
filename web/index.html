@@ -42,11 +42,32 @@
   </section>
 
   <nav class="tabs" role="tablist">
+    <a role="tab" href="#yol" data-tab="yol">Yol Haritası</a>
     <a role="tab" href="#esyalar" data-tab="esyalar">Eşyalar <span class="pill" id="tab-items"></span></a>
     <a role="tab" href="#harita" data-tab="harita">Gezegen Haritası <span class="pill" id="tab-chart"></span></a>
     <a role="tab" href="#intrinsic" data-tab="intrinsic">Intrinsic'ler <span class="pill" id="tab-intr"></span></a>
     <a role="tab" href="#ozet" data-tab="ozet">Özet</a>
   </nav>
+
+  <section class="panel" id="panel-yol" role="tabpanel" hidden>
+    <div class="plan-opts">
+      <span>Hedef: <strong id="plan-goal"></strong> <span class="muted small">(üst panelden değiştir)</span></span>
+      <label><input type="checkbox" id="opt-noPlat"> Platin harcamadan</label>
+      <label><input type="checkbox" id="opt-includeLimited"> Sınırlı erişimlileri dahil et <span class="muted small">(Baro, etkinlik, Prime Vault…)</span></label>
+      <label><input type="checkbox" id="opt-includeLowConfidence"> Kaynağı tahmini eşyaları dahil et</label>
+    </div>
+    <div class="plan-cards" id="plan-cards"></div>
+    <div class="milestones" id="plan-milestones"></div>
+    <h2>Sıradaki 10 adım</h2>
+    <ol class="plan-next" id="plan-next"></ol>
+    <h2>Aşama aşama yol haritası</h2>
+    <div id="plan-phases"></div>
+    <details class="plan-how">
+      <summary>Bu rota nasıl hesaplanıyor?</summary>
+      <p>Eksik olan her şey bir adım sayılır: eşyalar, gezegen haritası ve Steel Path (gezegen başına) ve Intrinsic rankları. Her adımın mastery XP'si ve tahmini aktif süresi vardır. Rota her seferinde, o an yapılabilecek adımlar arasından <strong>saat başına en çok XP</strong> vereni seçer. "Yapılabilir" şu demektir: gereken MR, o ana kadar toplanan XP ile karşılanmış olmalı; Intrinsic rankları sırayla açılır; Steel Path için normal harita bitmiş olmalı.</p>
+      <p>Süreler tahmindir: görev süreleri, seviye atlatma ve kaynak farmı için varsayımlar kullanılır (ayrıntılar <code>data/rapor.md</code> dosyasında). Syndicate rütbesi, klan araştırması ve quest gibi önkoşullar süreye eklenmez; eşya detayında listelenir. Rank testleri ve Foundry bekleme süreleri dahil değildir.</p>
+    </details>
+  </section>
 
   <section class="panel" id="panel-esyalar" role="tabpanel">
     <div class="toolbar">

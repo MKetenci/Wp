@@ -9,7 +9,8 @@
  *   nodes: { [nodeKey]: true },       // normal star chart nodes + junctions
  *   steelPath: { [nodeKey]: true },   // same keys, Steel Path
  *   intrinsics: { railjack: { Tactical: 0..10, ... }, drifter: { ... } },
- *   goal: 36                          // target rank (31 = L1)
+ *   goal: 36,                         // target rank (31 = L1)
+ *   plan: { noPlat, includeLimited, includeLowConfidence }   // route planner options
  * }
  */
 import { CATEGORIES, MR_MAX, rankForXp, xpForRank } from './mastery.js';
@@ -19,7 +20,10 @@ export const STATE_VERSION = 1;
 export const nodeKey = (node) => `${node.planet}/${node.name}`;
 
 export function emptyState() {
-  return { version: STATE_VERSION, items: {}, nodes: {}, steelPath: {}, intrinsics: { railjack: {}, drifter: {} }, goal: MR_MAX };
+  return {
+    version: STATE_VERSION, items: {}, nodes: {}, steelPath: {}, intrinsics: { railjack: {}, drifter: {} }, goal: MR_MAX,
+    plan: { noPlat: false, includeLimited: false, includeLowConfidence: true },
+  };
 }
 
 /** Rank-40 items gain 2 ranks per Forma: 30, 32, ..., 40. */
@@ -63,6 +67,8 @@ export function sanitizeState(raw, data) {
       if (v > 0) state.intrinsics[kind][tree] = Math.min(v, def.maxRank);
     }
   }
+
+  for (const k of Object.keys(state.plan)) if (typeof raw.plan?.[k] === 'boolean') state.plan[k] = raw.plan[k];
 
   const goal = Math.trunc(Number(raw.goal));
   if (goal >= 1 && goal <= 60) state.goal = goal;

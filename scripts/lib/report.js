@@ -1,6 +1,8 @@
 /** Renders data/rapor.md — the human-readable summary of the built data. */
 import * as M from '../../web/js/mastery.js';
 import { DEFAULTS, METHODS, estimateEffort } from '../../web/js/effort.js';
+import { planRoute, phases } from '../../web/js/planner.js';
+import { emptyState } from '../../web/js/progress.js';
 
 const fmt = (n) => Math.round(n).toLocaleString('tr-TR');
 const rank = (xp) => M.rankLabel(M.rankForXp(xp));
@@ -84,6 +86,7 @@ export default function renderReport({ data, checks, expected, joined, problems,
   p();
 
   renderEffort(p, items);
+  renderRoutes(p, data);
 
   p('## Veri kapsamı');
   p();
@@ -193,4 +196,35 @@ function renderEffort(p, items) {
     p(low.map((r) => `${r.i.name} (${r.e.label})`).join(', '));
     p();
   }
+}
+
+function renderRoutes(p, data) {
+  p('## Yol haritası özeti (sıfırdan başlayan oyuncu)');
+  p();
+  p('Rota her adımda, o an yapılabilecek adımlar (MR şartı, Intrinsic sırası, Steel Path için normal harita) arasından saat başına en çok XP vereni seçer. Süreler tahmini **aktif oyun süresidir**.');
+  p();
+  const scenarios = [
+    ['Varsayılan (sınırlı erişimliler hariç)', {}],
+    ['Platin harcamadan', { noPlat: true }],
+    ['Sınırlı erişimliler dahil', { includeLimited: true }],
+  ];
+  const goals = [10, 20, 25, 30, 31, 32, 33, 34, 35, 36];
+  p(`| Senaryo | ${goals.map((g) => M.rankLabel(g)).join(' | ')} |`);
+  p(`|---|${goals.map(() => '---:').join('|')}|`);
+  for (const [name, opts] of scenarios) {
+    const route = planRoute(data, emptyState(), 36, opts);
+    const at = new Map(route.milestones.map((m) => [m.rank, m.hours]));
+    p(`| ${name} | ${goals.map((g) => (at.has(g) ? fmt(at.get(g)) : '—')).join(' | ')} |`);
+  }
+  p();
+  p('Değerler saat cinsinden; "—" o senaryoda ulaşılamayan hedef demektir.');
+  p();
+  const route = planRoute(data, emptyState(), 33);
+  p('### Sıfırdan L3: aşamalar ve ana faaliyetler (varsayılan senaryo)');
+  p();
+  for (const ph of phases(route)) {
+    const top = [...ph.groups].sort((a, b) => b.xp - a.xp).slice(0, 4);
+    p(`- **${M.rankLabel(ph.fromRank)} → ${M.rankLabel(ph.toRank)}** (~${hours(ph.hours)} sa, ${ph.steps.length} adım): ${top.map((g) => `${g.label} (${g.steps.length})`).join(', ')}`);
+  }
+  p();
 }

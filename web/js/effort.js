@@ -138,8 +138,13 @@ export function resourceHours(resources = [], cfg = DEFAULTS) {
   return h;
 }
 
+/** Hours for one 0→cap levelling cycle of this item. */
+export function levelCycleHours(item, cfg = DEFAULTS) {
+  return cfg.levelHours[LEVEL_GROUP[item.category] || 'weapon'];
+}
+
 export function levelHours(item, cfg = DEFAULTS) {
-  const one = cfg.levelHours[LEVEL_GROUP[item.category] || 'weapon'];
+  const one = levelCycleHours(item, cfg);
   const cycles = 1 + (item.forma || 0) + (item.gild ? 1 : 0);
   return one * cycles + (item.forma || 0) * cfg.formaHours;
 }

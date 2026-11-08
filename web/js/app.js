@@ -2,11 +2,12 @@ import { CATEGORIES, MR_MAX, rankLabel, xpForRank } from './mastery.js';
 import { computeProgress, emptyState, goalStatus, itemXp, nodeKey, validRanks } from './progress.js';
 import { exportState, loadState, readImportFile, saveState } from './storage.js';
 import { METHODS, estimateEffort } from './effort.js';
+import { phases, planRoute } from './planner.js';
 
 const $ = (sel) => document.querySelector(sel);
 const fmt = (n) => Math.round(n).toLocaleString('tr-TR');
 const pct = (a, b) => (b ? Math.min(100, (a / b) * 100) : 0);
-const hrs = (h) => (!Number.isFinite(h) ? '—' : h < 1 ? `${Math.max(5, Math.round((h * 60) / 5) * 5)} dk` : `${h.toLocaleString('tr-TR', { maximumFractionDigits: 1 })} sa`);
+const hrs = (h) => (!Number.isFinite(h) ? '—' : h < 1 ? `${Math.max(5, Math.round((h * 60) / 5) * 5)} dk` : `${h.toLocaleString('tr-TR', { maximumFractionDigits: h >= 100 ? 0 : 1 })} sa`);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
 /** Short badge text for exclusive groups (full label goes in the tooltip). */
@@ -52,6 +53,7 @@ async function boot() {
   setupItems();
   renderPlanets();
   renderIntrinsics();
+  setupPlan();
   setupTabs();
   setupFileActions();
   const g = data.meta.generatedFrom;
@@ -68,6 +70,7 @@ function refresh({ save = true } = {}) {
   renderPlanetHeaders();
   renderIntrinsicTotals();
   renderSummary();
+  if (!$('#panel-yol').hidden) renderPlan();
   if (save && !saveState(state)) toast('İlerleme kaydedilemedi (tarayıcı depolaması kapalı olabilir).');
 }
 
@@ -117,13 +120,111 @@ function renderTabPills() {
 
 function setupTabs() {
   const show = () => {
-    const tab = (location.hash || '#esyalar').slice(1);
-    const valid = ['esyalar', 'harita', 'intrinsic', 'ozet'].includes(tab) ? tab : 'esyalar';
+    const tab = (location.hash || '#yol').slice(1);
+    const valid = ['yol', 'esyalar', 'harita', 'intrinsic', 'ozet'].includes(tab) ? tab : 'yol';
     for (const a of document.querySelectorAll('.tabs a')) a.setAttribute('aria-selected', String(a.dataset.tab === valid));
     for (const p of document.querySelectorAll('.panel')) p.hidden = p.id !== `panel-${valid}`;
+    if (valid === 'yol' && progress) renderPlan();
   };
   window.addEventListener('hashchange', show);
   show();
+}
+
+// ------------------------------------------------------------ plan ---
+
+let planSteps = new Map();
+
+function setupPlan() {
+  for (const key of Object.keys(state.plan)) {
+    const box = $(`#opt-${key}`);
+    box.checked = state.plan[key];
+    box.addEventListener('change', () => { state.plan[key] = box.checked; refresh(); });
+  }
+  // One delegated handler for every "done" checkbox in the plan.
+  $('#panel-yol').addEventListener('change', (e) => {
+    const id = e.target.dataset?.step;
+    if (!id || !e.target.checked) return;
+    completeStep(planSteps.get(id));
+  });
+}
+
+function completeStep(step) {
+  if (!step) return;
+  if (step.kind === 'item') setItemRank(itemsById.get(step.itemId), itemsById.get(step.itemId).maxRank);
+  else if (step.kind === 'chart' || step.kind === 'sp') {
+    const field = step.kind === 'chart' ? 'nodes' : 'steelPath';
+    for (const n of [...data.starChart.nodes, ...data.starChart.junctions]) if (n.planet === step.name) state[field][nodeKey(n)] = true;
+  } else if (step.kind === 'intrinsic') {
+    const [, kind, tree, r] = step.id.split(':');
+    state.intrinsics[kind][tree] = Math.max(state.intrinsics[kind][tree] || 0, Number(r));
+  }
+  renderItems();
+  renderPlanets();
+  renderIntrinsics();
+  refresh();
+  toast(`✓ ${step.name} tamamlandı olarak işaretlendi.`);
+}
+
+function stepRow(s, { showGroup = false } = {}) {
+  const item = s.itemId ? itemsById.get(s.itemId) : null;
+  const name = item ? `<a href="${esc(item.wikiUrl)}" target="_blank" rel="noopener">${esc(s.name)}</a>` : esc(s.name);
+  const where = showGroup ? ` · <span class="method">${esc(s.group.label)}</span>` : '';
+  const req = s.mrReq ? ` · MR ${s.mrReq}` : '';
+  return `<li class="step">
+    <label class="check"><input type="checkbox" data-step="${esc(s.id)}" aria-label="${esc(s.name)} tamamlandı"><span class="box" aria-hidden="true"></span></label>
+    <div class="step-main"><div class="step-name">${name}</div><div class="item-sub">${esc(s.sub)}${req}${where}</div></div>
+    <div class="step-num"><span>+${fmt(s.xp)} XP</span><span class="muted">~${hrs(s.hours)} · ${fmt(s.xpPerHour)}/sa</span></div>
+  </li>`;
+}
+
+function renderPlan() {
+  const route = planRoute(data, state, state.goal, state.plan);
+  planSteps = new Map(route.steps.map((s) => [s.id, s]));
+  $('#plan-goal').textContent = rankLabel(state.goal);
+
+  const sk = route.skipped;
+  const excluded = [
+    sk.limited && `${sk.limited} sınırlı erişimli`,
+    sk.plat && `${sk.plat} platin gerektiren`,
+    sk.lowConfidence && `${sk.lowConfidence} kaynağı tahmini`,
+    sk.impossible && `${sk.impossible} elde edilemez`,
+  ].filter(Boolean).join(', ');
+  let status;
+  if (route.remainingXp === 0) status = '<span class="ok">Hedefe ulaşıldı ✓</span>';
+  else if (route.reached) status = '<span class="ok">Ulaşılabilir</span>';
+  else if (route.reason === 'gated') status = `<span class="bad">Takıldı: kalan adımların MR şartı karşılanmıyor (${fmt(route.shortBy)} XP eksik)</span>`;
+  else status = `<span class="bad">Bu ayarlarla ulaşılamaz: ${fmt(route.shortBy)} XP eksik</span>${sk.limited || sk.plat ? '<br><span class="muted small">Sınırlı erişimlileri dahil etmeyi veya platin seçeneğini dene.</span>' : ''}`;
+
+  const card = (title, value, sub = '') => `<div class="sum-card"><div class="sum-title">${title}</div><div class="sum-num">${value}</div>${sub ? `<div class="muted small">${sub}</div>` : ''}</div>`;
+  $('#plan-cards').innerHTML =
+    (progress.total === 0 ? '<p class="notice">Henüz hiçbir ilerleme işaretlenmedi; rota sıfırdan başlayan bir oyuncu için hesaplandı. Sahip olduklarını <a href="#esyalar">Eşyalar</a>, <a href="#harita">Gezegen Haritası</a> ve <a href="#intrinsic">Intrinsic\'ler</a> sekmelerinden işaretle; rota anında güncellenir.</p>' : '') +
+    '<div class="plan-card-grid">' +
+    card('Hedefe kalan XP', fmt(route.remainingXp), `${rankLabel(progress.rank)} → ${rankLabel(state.goal)}`) +
+    card('Tahmini aktif süre', hrs(route.totalHours), route.totalHours > 0 ? `günde 2 saatle ~${Math.ceil(route.totalHours / 2)} gün` : '') +
+    card('Adım', fmt(route.steps.length), excluded ? `Hariç: ${excluded}` : '') +
+    card('Durum', status) +
+    '</div>';
+
+  $('#plan-milestones').innerHTML = route.milestones.length
+    ? `<div class="ms-row">${route.milestones.filter((m) => m.rank % 5 === 0 || m.rank > MR_MAX || m.rank === state.goal)
+        .map((m) => `<div class="ms"><span class="ms-rank">${rankLabel(m.rank)}</span><span class="muted small">~${hrs(m.hours)}</span></div>`).join('')}</div>`
+    : '';
+
+  $('#plan-next').innerHTML = route.steps.slice(0, 10).map((s) => stepRow(s, { showGroup: true })).join('') ||
+    '<li class="muted">Yapılacak adım yok.</li>';
+
+  $('#plan-phases').innerHTML = phases(route).map((ph, i) => `
+    <details class="phase"${i === 0 ? ' open' : ''}>
+      <summary>
+        <span class="phase-title">${rankLabel(ph.fromRank)} → ${rankLabel(ph.toRank)}</span>
+        <span class="muted small">${ph.steps.length} adım · +${fmt(ph.xp)} XP · ~${hrs(ph.hours)}</span>
+      </summary>
+      ${ph.groups.map((g) => `
+        <div class="pgroup">
+          <div class="pgroup-head"><strong>${esc(g.label)}</strong><span class="muted small">${g.steps.length} adım · +${fmt(g.xp)} XP · ~${hrs(g.hours)}</span></div>
+          <ul class="steps">${g.steps.map((s) => stepRow(s)).join('')}</ul>
+        </div>`).join('')}
+    </details>`).join('');
 }
 
 // ----------------------------------------------------------- items ---

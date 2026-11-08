@@ -178,6 +178,31 @@ Bu eşyaların kaynağı veride bulunamadı veya tahmin edildi. Düzeltmeler `da
 
 Mausolon (Bilinmiyor), Veritux (Bilinmiyor), Feverspine (Bilinmiyor), Ceramic Dagger (Market (kredi ile plan)), Dark Dagger (Market (kredi ile plan)), Dark Split-Sword (Heavy Blade) (Market (kredi ile plan)), Dark Sword (Market (kredi ile plan)), Heat Sword (Market (kredi ile plan)), Jaw Sword (Market (kredi ile plan)), Mk1-Bo (Market (kredi ile plan)), Mk1-Furax (Market (kredi ile plan)), Pangolin Sword (Market (kredi ile plan)), Paracesis (Market (kredi ile plan)), Plasma Sword (Market (kredi ile plan)), Sheev (Market (kredi ile plan)), Skiajati (Market (kredi ile plan)), Thalys (Market (kredi ile plan)), War Prime (Market (kredi ile plan)), AX-52 (Market (kredi ile plan)), Braton (Market (kredi ile plan)), Haalvu (Market (kredi ile plan)), Mk1-Braton (Market (kredi ile plan)), Mk1-Paris (Market (kredi ile plan)), Mk1-Strun (Market (kredi ile plan)), Thornbak (Market (kredi ile plan)), Lato (Market (kredi ile plan)), Mk1-Furis (Market (kredi ile plan)), Mk1-Kunai (Market (kredi ile plan)), Sicarus (Market (kredi ile plan))
 
+## Yol haritası özeti (sıfırdan başlayan oyuncu)
+
+Rota her adımda, o an yapılabilecek adımlar (MR şartı, Intrinsic sırası, Steel Path için normal harita) arasından saat başına en çok XP vereni seçer. Süreler tahmini **aktif oyun süresidir**.
+
+| Senaryo | MR 10 | MR 20 | MR 25 | MR 30 | L1 | L2 | L3 | L4 | L5 | L6 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Varsayılan (sınırlı erişimliler hariç) | 43 | 279 | 617 | 1.374 | 1.647 | 1.943 | 2.376 | — | — | — |
+| Platin harcamadan | 43 | 288 | 633 | 1.432 | 1.712 | 2.014 | — | — | — | — |
+| Sınırlı erişimliler dahil | 42 | 230 | 475 | 944 | 1.089 | 1.258 | 1.462 | 1.704 | 1.999 | 2.313 |
+
+Değerler saat cinsinden; "—" o senaryoda ulaşılamayan hedef demektir.
+
+### Sıfırdan L3: aşamalar ve ana faaliyetler (varsayılan senaryo)
+
+- **MR 0 → MR 5** (~9,4 sa, 15 adım): Market alışverişi (kredi ile plan) (14), Gezegen haritası görevleri (1)
+- **MR 5 → MR 10** (~33,2 sa, 57 adım): Market alışverişi (kredi ile plan) (44), Klan Dojo — Tenno Lab (5), Market (platinle hazır al) (2), Drifter Intrinsic'leri (4)
+- **MR 10 → MR 15** (~73,8 sa, 91 adım): Market alışverişi (kredi ile plan) (60), Market (platinle hazır al) (7), Klan Dojo — Tenno Lab (3), Railjack Intrinsic'leri (5)
+- **MR 15 → MR 20** (~162,7 sa, 125 adım): Market alışverişi (kredi ile plan) (35), Klan Dojo — Tenno Lab (21), Yoldaş yetiştirme (8), Klan Dojo — Energy Lab (9)
+- **MR 20 → MR 25** (~338,3 sa, 154 adım): Void Relic farmı (Prime parçaları) (27), Market alışverişi (kredi ile plan) (13), Klan Dojo — Energy Lab (12), Yoldaş yetiştirme (6)
+- **MR 25 → MR 28** (~363,9 sa, 116 adım): Void Relic farmı (Prime parçaları) (22), Satıcı — Solaris United (Legs) (7), Satıcı — Ventkids (5), Sisters of Parvos (Hound parçaları) (3)
+- **MR 28 → MR 30** (~392,8 sa, 98 adım): Void Relic farmı (Prime parçaları) (27), Drifter Intrinsic'leri (12), Railjack Intrinsic'leri (12), Market alışverişi (kredi ile plan) (3)
+- **MR 30 → L1** (~273 sa, 48 adım): Technocyte Coda (5), Kuva Lich (4), Satıcı — Ostron (Hok) (5), Railjack Intrinsic'leri (8)
+- **L1 → L2** (~296 sa, 37 adım): Kuva Lich (17), Sisters of Parvos (11), Technocyte Coda (9)
+- **L2 → L3** (~432,7 sa, 54 adım): Steel Path görevleri (13), Farm — Deimos/Armatus (Disruption) (2), Farm — Earth/Cetus (Cetus Bounty) (3), Satıcı — Ostron (Hok) (3)
+
 ## Veri kapsamı
 
 - Edinme verisi (WFCD) eşleşen eşya: **818 / 820**
